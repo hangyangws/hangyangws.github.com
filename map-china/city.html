@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>全国数据</title>
+
+	<link rel="stylesheet" href="css/index.css" />
+
+	<script src="js/jquery.js"></script>
+</head>
+<body>
+
+	<div class="all-wrap">
+		<div class="map-wrap" style="padding-left:0">
+			<div id="ChinaMap" style="height:500px"></div>
+		</div>
+		<ul id="city-data">
+			<span></span>
+			<!-- 动态加载Dom结点 -->
+<!-- 			<li>
+	<span><i>A</i><em>世界城</em></span>
+	<em>话题数<i>21</i></em>
+	<em>讨论数量 <i>45%</i></em>
+</li> -->
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=ff883e9322a8a932dbd758dbcf034ca9"></script>
+	<script type="text/javascript">
+
+		// 获取url传入的城市
+	    var urlCity = window.location.search.split('=')[1];
+	    $('#city-data>span').html(decodeURI(urlCity));
+
+		// $.ajax({
+		// 	type:'get',
+		// 	async: true,
+		//     jsonp: "juche_callback",
+		//     jsonpCallback: "get_data",
+		//     url: "http://*********************************?city="+urlCity,
+		//     dataType: "jsonp",
+		//     success: function(result) {
+		// 		//初始化地图对象，加载地图
+		// 		var map = new AMap.Map("ChinaMap",{
+		// 			resizeEnable: true,
+		// 			//二维地图显示视口
+		// 			view: new AMap.View2D({
+		// 				resizeEnable: true,//自适应地图容器尺寸变化
+		// 				isHotspot: true,
+		// 				level: 11
+		// 			})
+		// 		});
+		// 		//添加点标记
+		// 		var i=0;
+		// 		while(result[i]) addMarker(result[i]['x'],result[i]['y'],result[i]['index'],result[i]['name'],result[i++]['data']);
+		// 		// 标记点
+		// 		function addMarker(x,y,index,name,data){
+
+		// 			var temp_li,temp_em='',numChar=String.fromCharCode(+index+64);
+
+		// 			var marker = new AMap.Marker({
+		// 				map:map,
+		// 				position: new AMap.LngLat(x,y),
+		// 				icon: "http://webapi.amap.com/images/"+index+".png"
+		// 			});
+		// 			marker.setAnimation('AMAP_ANIMATION_BOUNCE');//标记的动画
+		// 			marker.setTitle(numChar+' : '+name);//鼠标经过的提示
+		// 			map.setFitView(); //调整到合理视野
+
+		// 			// 生成Dom li 结点
+		// 			$.each(data,function(k,v){
+		// 				temp_em+='<em>'+k+'<i>'+v+'</i></em>';
+		// 			});
+		// 			temp_li='<li><span><i>'+numChar+'</i><em>'+name+'</em></span>'+temp_em+'</li>';
+		// 			$('#city-data').append(temp_li).slideDown(200);
+		// 		}
+		//     }
+		// });
+
+
+// ##############################(由#号包起来的代码只是参考(应该删除) 正规代码是上面的ajax函数 )#######################################################
+		//初始化地图对象，加载地图
+		var map = new AMap.Map("ChinaMap",{
+			resizeEnable: true,
+			//二维地图显示视口
+			view: new AMap.View2D({
+				resizeEnable: true,//自适应地图容器尺寸变化
+				isHotspot: true,
+				level: 11
+			})
+		});
+
+		//添加点标记
+		var data=[
+			{'x':116.397428,'y':39.90923,'index':1,'name':'火车站','data':{'数据一':'111111','数据二':222}},
+			{'x':116.397356,'y':39.90723,'index':2,'name':'火车站','data':{'数据一':'111111','数据二':222}},
+			{'x':116.397354,'y':39.90563,'index':3,'name':'火车站','data':{'数据一':'111111','数据二':222}},
+			{'x':116.393528,'y':39.90623,'index':4,'name':'世纪城','data':{'数据一':'data11','数据二':'222222','数据三':3}}
+		],i=0;
+		while(data[i]) addMarker(data[i]['x'],data[i]['y'],data[i]['index'],data[i]['name'],data[i++]['data']);
+		// 标记点
+		function addMarker(x,y,index,name,data){
+
+			var temp_li,temp_em='',numChar=String.fromCharCode(+index+64);
+
+			var marker = new AMap.Marker({
+				map:map,
+				position: new AMap.LngLat(x,y),
+				icon: "http://webapi.amap.com/images/"+index+".png"
+			});
+			marker.setAnimation('AMAP_ANIMATION_BOUNCE');//标记的动画
+			marker.setTitle(numChar+' : '+name);//鼠标经过的提示
+			map.setFitView(); //调整到合理视野
+
+			// 生成Dom li 结点
+			$.each(data,function(k,v){
+				temp_em+='<em>'+k+'<i>'+v+'</i></em>';
+			});
+			temp_li='<li><span><i>'+numChar+'</i><em>'+name+'</em></span>'+temp_em+'</li>';
+			$('#city-data').append(temp_li).slideDown(200);
+		}
+// #####################################################################################
+
+	</script>
+</body>
+</html>
