@@ -1,0 +1,67 @@
+ <!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>rotate</title>
+	<style>
+		body {
+			margin: 0;
+			background-color: #333;
+		}
+		#main {
+			width: 500px;
+			height: 500px;
+			border-radius: 250px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			background: -webkit-linear-gradient(top, transparent 19px, #333 20px);
+			background-size: 100% 20px;
+			background-color: #ccc;
+		}
+		#main:before {
+			content: '';
+			position: absolute;
+			width: 500px;
+			height: 500px;
+			background: -webkit-linear-gradient(left, transparent 19px, #333 20px);
+			background-size: 20px 100%;
+		}
+	</style>
+	<script src="raphael.js"></script>
+	<script>
+	Raphael(function () {
+		var paper = Raphael('main',500,500),
+			rect = [],
+			length=10,
+			color;
+		for (var i=0 ; i<length ; i++) {
+			color = Raphael.getColor();
+			rect[i] = paper.rect(0,249,500,2).attr({fill: color,'stroke-width':0,'opacity':.8});
+		}
+		paper.circle(250,250,10).animate({fill:'#333',stroke:'#000','stroke-width':40,'stroke-opacity':.4},1000,'elastic');
+		var firstPoint = 0,
+			changeAngel = 0;
+		window.onmousemove = function (e) {
+			e = e || window.event;
+			if (firstPoint == 0) {
+				firstPoint = e.clientX;
+				return;
+			}
+			changeAngel += e.clientX - firstPoint;
+			for (i=0 ; i<length ; i++) {
+				rect[i].attr({transform:'r'+changeAngel*(i+1)});
+			}
+			// 开始旋转
+			firstPoint = e.clientX
+		}
+	});
+	</script>
+</head>
+<body>
+	<div id="main"></div>
+</body>
+</html>
