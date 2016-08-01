@@ -1,0 +1,464 @@
+@charset 'utf-8';
+
+/*mask*/
+
+#mask {
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+
+/*loading*/
+
+.load-wrap {
+    width: 100%;
+    height: 100px;
+}
+
+
+/*remaind*/
+
+.remaind-wrap {
+    width: 300px;
+    height: 125px;
+    text-align: center;
+}
+
+#remaindMessage {
+    display: block;
+    height: 50px;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+#confirmRemaind {
+    font-size: 20px;
+    line-height: 35px;
+    display: block;
+    height: 35px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    color: #333;
+    background-color: #999;
+}
+
+#confirmRemaind:hover {
+    background-color: #ccc;
+}
+
+
+/*sign model*/
+
+.sign-m {
+    background-color: #f5f6f5;
+}
+
+.sign-num {
+    line-height: 30px;
+    width: 44px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.sign-tel {
+    width: 173px;
+}
+
+.sign-in-s,
+.sign-up-s,
+.sign-re-s {
+    width: 240px;
+}
+
+.sign-m .b1m:hover {
+    color: #bdb099;
+    background-color: #fff;
+}
+
+.sign-x::before,
+.sign-x::after {
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    display: block;
+    width: 2px;
+    height: 16px;
+    content: '';
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: #999;
+}
+
+.sign-x::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.sign-x:hover {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.sign-err {
+    color: #f33;
+}
+
+.offset-top {
+    -webkit-transform: scale(.8, .8);
+    -moz-transform: scale(.8, .8);
+    -ms-transform: scale(.8, .8);
+    -o-transform: scale(.8, .8);
+    transform: scale(.8, .8);
+}
+
+
+/*输入框提示*/
+
+input.err {
+    -moz-box-shadow: 0 0 1px 1px #f33 inset;
+    box-shadow: 0 0 1px 1px #f33 inset;
+}
+
+
+/*others*/
+
+.ts4 {
+    -webkit-transition: all .4s ease-out;
+    -moz-transition: all .4s ease-out;
+    -o-transition: all .4s ease-out;
+    transition: all .4s ease-out;
+}
+
+.ts1 {
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    transition: all 1s ease-out;
+}
+
+.ts7 {
+    -webkit-transition: all 7s ease-out;
+    -moz-transition: all 7s ease-out;
+    -o-transition: all 7s ease-out;
+    transition: all 7s ease-out;
+}
+
+
+/*text over*/
+
+.to {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*border*/
+
+.b13 {
+    border: 1px solid #333;
+}
+
+.b16 {
+    border: 1px solid #666;
+}
+
+.b1e0 {
+    border: 1px solid #e0e0e0;
+}
+
+.b1m {
+    border: 1px solid #bdb099;
+}
+
+.b1f {
+    border: 1px solid #fff;
+}
+
+
+/*radius*/
+
+.radius4 {
+    border-radius: 4px;
+}
+
+.radius50 {
+    border-radius: 50%;
+}
+
+.blur1 {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
+
+.blur2 {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.middle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+
+/*mask for click*/
+
+.click-mask {
+    position: relative;
+}
+
+.click-mask::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: transparent;
+}
+
+
+/*clear*/
+
+.clear-hidden {
+    overflow: hidden;
+}
+
+.clear {
+    zoom: 1;
+}
+
+.clear:after {
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: '.';
+}
+
+
+/*component*/
+
+
+/*图标*/
+
+.i-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../img/info/i-icon.png) no-repeat;
+}
+
+.i-chapel {
+    background-position: 0 0;
+}
+
+.i-beach {
+    background-position: -24px 0;
+}
+
+.i-cliff {
+    background-position: -48px 0;
+}
+
+.i-forest {
+    background-position: -72px 0;
+}
+
+.i-indoor {
+    background-position: -96px 0;
+}
+
+.i-garden {
+    background-position: -120px 0;
+}
+
+.i-villa {
+    background-position: -144px 0;
+}
+
+.i-water {
+    background-position: -168px 0;
+}
+
+.i-gazebo {
+    background-position: -192px 0;
+}
+
+.i-outdoor {
+    background-position: -216px 0;
+}
+
+.i-accomodation {
+    background-position: 0 -24px;
+}
+
+.i-local {
+    background-position: -24px -24px;
+}
+
+.i-global {
+    background-position: -48px -24px;
+}
+
+.i-video {
+    background-position: -72px -24px;
+}
+
+.i-photo {
+    background-position: -96px -24px;
+}
+
+.i-phvd {
+    background-position: -120px -24px;
+}
+
+.i-cn {
+    background-position: -144px -24px;
+}
+
+.i-en {
+    background-position: -168px -24px;
+}
+
+.i-makeup {
+    background-position: -192px -24px;
+}
+
+.i-cnen {
+    background-position: -216px -24px;
+}
+
+.i-maxcapacity {
+    background-position: 0 -48px;
+}
+
+.i-head {
+    background-position: -24px -48px;
+}
+
+
+/*箭头*/
+
+.i-arrow {
+    width: 18px;
+    height: 18px;
+    background: url(../img/info/arrow.png) no-repeat;
+}
+
+.i-arrow-t {
+    background-position: 0 -36px;
+}
+
+.i-arrow-l {
+    background-position: 0 -18px;
+}
+
+.i-arrow-r {
+    background-position: 0 0;
+}
+
+.i-arrow-b {
+    background-position: 0 -54px;
+}
+
+
+/*css hart*/
+
+.css-hart {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #999;
+}
+
+.css-hart,
+.css-arrow::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.css-hart::before {
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 14px;
+    height: 14px;
+    content: '';
+    border-radius: 7px;
+    background-color: #999;
+}
+
+.css-hart::after {
+    position: absolute;
+    top: -7px;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    content: '';
+    border-radius: 7px;
+    background-color: #999;
+}
+
+.css-hart.active,
+.css-hart.active::before,
+.css-hart.active::after {
+    background-color: #f55;
+}
+
+
+/*css arrow*/
+
+.css-arrow {
+    overflow: hidden;
+    width: 20px;
+    height: 11px;
+}
+
+.css-arrow::before {
+    position: absolute;
+    top: -8px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    content: '';
+    border: 1px solid #999;
+}
+
+.css-arrow.active::before {
+    top: 5px;
+}
+
+
+/*字符图标*/
+
+.arial {
+    font-family: 'Songti', '宋体';
+}

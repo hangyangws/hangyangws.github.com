@@ -1,0 +1,69 @@
+@charset 'utf-8';
+body {
+	margin: 0;
+}
+#div1 {
+	position: absolute;
+	width: 800px;
+	height: 500px;
+	background: #333;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+
+}
+#div2 {
+	width: 480px;
+	height: 300px;
+	margin: 100px 160px;
+	background: #fff;
+}
+.sonAll {
+	position: absolute;
+	background-color: #666;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}
+#son1 {
+	left: 160px;
+	top: 0;
+	height: 40px;
+	width: 80px;
+}
+#son2 {
+	right: 0;
+	top: 100px;
+	height: 100px;
+	width: 20px;
+}
+#son3 {
+	right: 160px;
+	bottom: 0;
+	height: 80px;
+	width: 80px;
+}
+#move {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background: #111;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	cursor: move;
+}
+#p1 {
+	margin: 0;
+	position: absolute;
+	top: -50px;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	letter-spacing: 2px;
+	background-color: #999;
+	color: #fff;
+	font-size: 20px;
+	font-family: '微软雅黑';
+	text-align: center;
+}
