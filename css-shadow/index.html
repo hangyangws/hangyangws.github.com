@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弧形阴影-翘边阴影</title>
+	<style>
+		div {
+			position: relative;
+			width: 300px;
+			height: 100px;
+			line-height: 100px;
+			letter-spacing: 1px;
+			margin: 50px auto;
+			color: #fff;
+			font-size: 1.5em;
+			text-align: center;
+			font-family: '微软雅黑';
+			background-color: #6cf;
+			box-shadow: 0 0 2px rgba(0,0,0,0.8);
+		}
+		.hu:before {
+			content: '';
+			z-index: -1;
+			position: absolute;
+			bottom: 0;
+			top: 50px;
+			left: 8px;
+			right: 8px;
+			box-shadow: 0 0 10px 1px rgba(0,0,0,0.8);
+			border-radius: 200px/10px;
+		}
+		.qiao:before {
+			content: '';
+			z-index: -1;
+			position: absolute;
+			top: 14px;
+			bottom: 15px;
+			left: 5px;
+			right: 5px;
+			-webkit-transform: skew(10deg) rotate(5deg);
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.8);
+		}
+		.qiao:after {
+			content: '';
+			z-index: -1;
+			position: absolute;
+			top: 14px;
+			bottom: 15px;
+			left: 5px;
+			right: 5px;
+			-webkit-transform: skew(-10deg) rotate(-5deg);
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.8);
+		}
+	</style>
+</head>
+<body>
+	<div class="qiao">这里是翘边阴影</div>
+	<div class="hu">这里是弧形阴影</div>
+</body>
+</html>
