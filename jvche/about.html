@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>聚车科技-查车价</title>
+	<link rel="icon" type="image/png" href="./images/logo.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<link rel="stylesheet" href="css/public.css" />
+	<link rel="stylesheet" href="css/header.css" />
+	<link rel="stylesheet" href="css/about.css" />
+
+	<script type="text/javascript" src="js/jquery-min.js"></script>
+
+	<script type="text/javascript" src="js/header.js"></script>
+	<script type="text/javascript" src="js/about.js"></script>
+</head>
+<body>
+	<header id="header">
+		<div class="header-top">
+			<a href="index.html" class="header-brand"></a>
+			<div class="header-nav">
+				<a href="index.html" class="header-nav-each car">汽车帮</a>
+				<a href="about.html" class="header-nav-each about">关于</a>
+				<a href="join.html" class="header-nav-each  join">加入</a>
+			</div>
+		</div>
+		<div class="headr-menu">
+			<div  class="header-menu-sel" id="menu-sel" title="菜单">
+				<span class="sel-menu">MENU</span>
+				<span id="sel-extend">
+					<em></em>
+					<em class="header-menu-sel-mid"></em>
+					<em></em>
+				</span>
+			</div>
+			<div class="header-menu-con">
+				<a href="index.html" class="header-menu-car">汽车帮</a>
+				<a href="about.html" class="header-menu-check">关于</a>
+				<a href="join.html" class="header-menu-join">加入</a>
+			</div>
+		</div>
+	</header>
+	<div class="location">
+		<div class="location-title">
+			<span>成都聚车网络科技有限公司</span>
+		</div>
+		<div class="localtion-content">
+			<div>
+				<span>
+					我们团队的核心人员来自于互联网和汽车行业的资深人士，
+				</span>
+				<span>
+					专注、专业于汽车销售咨询和汽车数据挖掘与分析。
+				</span>
+				<span>
+					我们梦想做出伟大的产品，让有车生活更美好。
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="time">
+		<div class="time-each">
+			<div class="t-e-title">
+				<span>2013</span>
+			</div>
+			<div class="r-e-content">
+				<span>11月&nbsp;聚车科技成立</span>
+			</div>
+		</div>
+		<div class="time-each">
+			<div class="t-e-title">
+				<span>2014</span>
+			</div>
+			<div class="r-e-content">
+				<span>01月&nbsp;查车价1.0&nbsp;上线IOS市场</span>
+				<span>06月&nbsp;获得天使投资</span>
+				<span>07月&nbsp;查车价1.8&nbsp;上线安卓市场</span>
+				<span>08月&nbsp;用户数过15万，每天可获得数千次买车线索</span>
+				<span>09月&nbsp;查车价2.0全新改版上线，真车价上线</span>
+				<span>10月&nbsp;开始收支持平</span>
+				<span>12月&nbsp;汽车帮上线安卓市场和IOS市场</span>
+			</div>
+		</div>
+		<div class="time-each">
+			<div class="t-e-title">
+				<span>2015</span>
+			</div>
+			<div class="r-e-content">
+				<span>01月&nbsp;汽车帮查违章上线</span>
+			</div>
+		</div>
+	</div>
+	<div class="map">
+		<div id="map-wrap"></div>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ISh8N12Pt1HwgdRbLxXY7APY"></script>
+		<script type="text/javascript">
+		    // 百度地图API功能
+		    var map = new BMap.Map("map-wrap");
+		    var point = new BMap.Point(104.078323,30.550441);
+		    map.centerAndZoom(point, 17);
+		    var marker = new BMap.Marker(point);  // 创建标注
+		    map.addOverlay(marker);               // 将标注添加到地图中
+		    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		    map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+		    map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+		    map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+		    map.enableKeyboard();//启用键盘上下左右键移动地图
+		</script>
+		<div class="map-brief">
+			<span>联系人:<span>王女士</span></span>
+			<span>联系电话:<span>028-62135008</span></span>
+			<span>邮箱:<span>coral@jvche.cn</span></span>
+			<span>地址:<span>高新区天华路299号英俊一期9-2103</span></span>
+		</div>
+	</div>
+</body>
+</html>

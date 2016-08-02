@@ -1,0 +1,55 @@
+@charset 'utf-8';
+/*public*/
+html,body{
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+}
+/*position: absolute;*/
+.extend-witch,.extend-top,#sel-extend,.header-nav,.rT-left span,.rT-right span,.rI-up span,.rI-down span,.dlImage,.rD-right,.two-top-wrap>span,.three-top-wrap>span,.four-top-wrap>span,.five-top-wrap>span,.six-top-wrap>span,.seven-top-wrap>span,.eight-top-wrap>span,.nine-top-wrap>span,.tD-image-l,.tD-image-r,.three-light,.three-car,.four-image>span,.fourAll,.seven-image span,.nine-down {
+	position: absolute;
+}
+/*position: relative;*/
+.header-menu-sel,.header-menu-con,.header-top,.headr-menu,.center-one,.rT-left,.rT-right,.rI-up,.rI-down,.right-down,.dL-up,.dL-down,.two-top,.three-top,.four-top,.five-top,.six-top,.seven-top,.eight-top,.nine-top,.two-top-wrap,.three-top-wrap,.four-top-wrap,.five-top-wrap,.six-top-wrap,.seven-top-wrap,.eight-top-wrap,.nine-top-wrap,.two-down,.three-down,.four-down,.five-down,.six-down,.seven-down,.eight-down,.tD-image,.four-image,.center-nine,.nine-up,.nine-left {
+	position: relative;
+}
+/*position: fixed;*/
+.extend {
+	position: fixed;
+}
+/*color:#fff*/
+.sel-menu,.header-menu-con a,.rT-left span,.dlText {
+	color: #fff;
+}
+/*background-color: #fff;*/
+#sel-extend em,.center-two,.three-light,.center-five,.center-seven,.center-nine,.rT-right span {
+	background-color: #fff;
+}
+/*text-decoration*/
+.header-brand,.header-nav-each,.header-menu-con a,.nine-down span a {
+	text-decoration: none;
+}
+/*display*/
+.header-brand,.header-nav,.header-nav-each,.sel-menu,.dlText,.myFSpace {
+	display: inline-block;
+}
+/*display: none;*/
+.extend-top,.tD-image-l,.tD-image-r,.fourAll,.fourION,.fourITW {
+	display: none;
+}
+/*display: block;*/
+.header-menu-con a,#sel-extend em,#sel-extend,.witch-all,.witch-all,.rI-up,.rI-down,.dL-up,.dL-down,.rD-right span,.two-top-wrap>span,.three-top-wrap>span,.four-top-wrap>span,.five-top-wrap>span,.six-top-wrap>span,.seven-top-wrap>span,.eight-top-wrap>span,.nine-top-wrap>span,.twTile,.twContent,.three-light span,.myOtherRow,.nine-down span {
+	display: block;
+}
+/*text-align: center;*/
+.sel-menu,.dlText,.nine-down span,.rT-right span {
+	text-align: center;
+}
+/*font-family: '微软雅黑','华文细黑';*/
+.header-nav-each,.header-menu-con a,.sel-menu,.rT-right span,.rI-up span,.rI-down span,.dlText,.twContent,.nine-down span,.rT-left span {
+	font-family: '微软雅黑','华文细黑';
+}
+/*cursor: pointer;*/
+.header-menu-sel,#sel-extend,.dL-up,.dL-down,.extend-top,.witch-all {
+	cursor: pointer;
+}
