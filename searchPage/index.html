@@ -18,13 +18,17 @@
 
 <body class="ofh">
     <canvas id="bgAnimate"></canvas>
-    <main class="none">
-        <header>Good morning, hangyangws</header>
-        <section>
-            <div>
-                <span title="Chrome"></span>
-                <input type="text" placeholder="星期五，明天放假啦" />
-                <span title="Baidu"></span>
+    <!-- 加上 bg-animate 开启动画-->
+    <main id="main" class="main pa w1 h1 t0 l0 tac">
+        <header class="user-wrap pa w1 fwb">
+            <h3 class="user-name js-name"></h3>
+            <p class="user-greet js-greet"></p>
+        </header>
+        <section class="top-50 top-middle">
+            <div class="search-wrap h60 dlb fs0">
+                <span class="i-chrome dlb h1 w60 vam" title="Chrome"></span>
+                <input class="search-ipt dlb fc3 fs16 dlb h1 vam" type="text" placeholder="回车一下百度，两下谷歌，空格分词" />
+                <span class="i-baidu dlb h1 w60 vam" title="Baidu"></span>
             </div>
         </section>
     </main>

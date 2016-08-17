@@ -6,7 +6,10 @@
 ;
 ! function(win, doc, undefined) {
     'use strict';
-    var $canvas = doc.getElementById('bgAnimate'), // canvas Dom节点
+    var $main = doc.querySelector('#main'),
+        _user_obj = JSON.parse(decodeURI(win.location.href.split('?')[1])),
+        // 粒子动画相应参数与方法
+        $canvas = doc.querySelector('#bgAnimate'), // canvas Dom节点
         ctx = $canvas.getContext('2d'), // canvas 2d 上下文
         addEvent = (function() { // 事件绑定函数
             if (win.addEventListener) {
@@ -24,7 +27,7 @@
                 }
             }
         })(),
-        _dot_number = 240, // 离子数量
+        _dot_number = 100, // 离子数量
         _dot_acceleration = 1, // 离子加速度
         _dot_radius = 1, // 粒子半径
         _line_width = 1, // 粒子连线最大宽度
@@ -60,7 +63,7 @@
                     xa: Math.random() * _dot_acceleration - _dot_acceleration / 2,
                     ya: Math.random() * _dot_acceleration - _dot_acceleration / 2,
                     color: getColor(),
-                    power: 8000
+                    power: 18000
                 });
             }
             return dots;
@@ -75,7 +78,13 @@
                     win.setTimeout(callBack, 16.6);
                 };
         })(),
-        APP = {
+        ANIMATE = {
+            init: function() {
+                ANIMATE.resize(); // 窗口初始化
+                ANIMATE.animateDraw(); // 开始动画
+                // 检测是否要背景动画
+                _user_obj.animate && ($main.className = $main.className + ' bg-animate');
+            },
             resize: function() {
                 $canvas.width = getWinWidth();
                 $canvas.height = getWinHeight();
@@ -129,22 +138,81 @@
                         }
                     }
                 }
-                RAF(APP.animateDraw);
+                RAF(ANIMATE.animateDraw);
+            }
+        },
+        // 搜索框相应参数与方法
+        now = new Date(), //
+        $ipt = $main.querySelector('.search-ipt'), // 输入框Dom
+        _ipt_time = {
+            time1: null,
+            time2: null
+        },
+        SEARCH = {
+            init: function() {
+                // 用户名
+                $main.querySelector('.js-name').innerHTML = this.getTime() + '，' + _user_obj.name;
+                // 问候语编写
+                $main.querySelector('.js-greet').innerHTML = [
+                    '星期日，明天就要上班了',
+                    '星期一，怎么那么多任务要完成',
+                    '星期二，加油我是最厉害的',
+                    '星期三，测试提交了好多BUG',
+                    '星期四，还有一天就放假了',
+                    '星期五，算了还是明天加班吧',
+                    '星期六，看了朋友的朋友圈我觉得他们会失去本宝宝'
+                ][now.getDay()];
+                // 输入框聚焦
+                $ipt.focus();
+            },
+            getTime: function() {
+                var hour = now.getHours()
+                if (hour < 11) {
+                    return 'Good morning';
+                } else if (hour < 16) {
+                    return 'Good Afternoon';
+                } else {
+                    return 'Good evening';
+                }
             }
         };
+
     /**
-     * 事件绑定
+     * 搜索框
      */
-    APP.resize(); // 窗口初始化
-    // 开始动画
-    APP.animateDraw();
-    addEvent(win, 'resize', APP.resize); // 窗口改变大小
+    SEARCH.init();
+    addEvent($ipt, 'keydown', function(e) {
+        e = e || win.event;
+        if ((e.keyCode || e.which) === 13) {
+            var _val = $ipt.value.replace(/(^\s*)|(\s*$)/g, '').split(/\s+/);
+            if (_ipt_time.time1) {
+                _ipt_time.time2 = new Date().getTime();
+            } else {
+                _ipt_time.time1 = new Date().getTime();
+                var _time = setTimeout(function() {
+                    clearTimeout(_time);
+                    if (_ipt_time.time2 && (_ipt_time.time2 - _ipt_time.time1 < 320)) {
+                        win.location.href = 'https://www.google.com/#q=' + _val.join('+');
+                    } else {
+                        win.location.href = 'https://www.baidu.com/s?ie=UTF-8&wd=' + _val.join('%20');
+                    }
+                    _ipt_time.time1 = null;
+                    _ipt_time.time2 = null;
+                }, 340);
+            }
+        }
+    });
+    /**
+     * 动画
+     */
+    ANIMATE.init(); // 动画初始化
+    addEvent(win, 'resize', ANIMATE.resize); // 窗口改变大小
     addEvent(win, 'mousemove', function(e) { // 鼠标移动
         e = e || win.event;
         _mouse_dot.x = e.clientX;
         _mouse_dot.y = e.clientY;
     });
-    addEvent(win, 'mouseout', function() { // 鼠标yi
+    addEvent(win, 'mouseout', function() { // 鼠标移出
         _mouse_dot.x = null;
         _mouse_dot.y = null;
     });
