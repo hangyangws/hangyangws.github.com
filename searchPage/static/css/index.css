@@ -1,0 +1,14 @@
+@charset 'utf-8';
+
+/**
+ * Created by hangyangws(hangyangws@foxmail.com) in 2016-08-16.
+ */
+
+
+/*public*/
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}

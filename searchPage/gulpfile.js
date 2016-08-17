@@ -3,10 +3,10 @@
  */
 
 var gulp = require('gulp'),
-    clean = require('gulp-clean'), // 文件清理
-    minifycss = require('gulp-clean-css'), // css 压缩
-    uglify = require('gulp-uglify'), // js 压缩
-    concat = require('gulp-concat'), // 文件合并
+    // clean = require('gulp-clean'), // 文件清理
+    // minifycss = require('gulp-clean-css'), // css 压缩
+    // uglify = require('gulp-uglify'), // js 压缩
+    // concat = require('gulp-concat'), // 文件合并
     browserSync = require('browser-sync').create(), // 浏览器刷新
     myPath = { // 路径参数
         clearPath: [
@@ -30,8 +30,8 @@ var gulp = require('gulp'),
         minToJs: 'static/dist',
         reloadFile: [
             'index.html',
-            'static/dist/*.css',
-            'static/dist/*.js'
+            'static/css/*.css',
+            'static/js/*.js'
         ]
     };
 
