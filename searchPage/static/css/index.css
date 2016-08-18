@@ -9,10 +9,10 @@
 
 html,
 body {
-    height: 100%;
     width: 100%;
-    min-height: 668px;
     min-width: 950px;
+    height: 100%;
+    min-height: 668px;
 }
 
 .i-chrome {
@@ -27,71 +27,99 @@ body {
 /*main*/
 
 .bg-animate {
-    background: linear-gradient(30deg, rgba(255, 255, 255, .1), rgba(255, 200, 200, .4), #ffc);
-    background-size: 800% 800%;
     -webkit-animation: bg-generator 10s ease infinite;
     animation: bg-generator 10s ease infinite;
+    background: -webkit-linear-gradient(30deg, rgba(255, 255, 255, .1), rgba(255, 200, 200, .4), #ffc);
+    background: -o-linear-gradient(30deg, rgba(255, 255, 255, .1), rgba(255, 200, 200, .4), #ffc);
+    background: linear-gradient(30deg, rgba(255, 255, 255, .1), rgba(255, 200, 200, .4), #ffc);
+    background: -moz-linear-gradient(30deg, rgba(255, 255, 255, .1), rgba(255, 200, 200, .4), #ffc);
+    background-size: 800% 800%;
 }
 
-
-/*user*/
-
 .user-wrap {
+    color: rgba(0, 0, 0, .4);
+    background: -webkit-linear-gradient(34deg, rgba(255, 255, 51, .4), rgba(255, 153, 51, .4), rgba(0, 102, 255, .4), rgba(51, 255, 153, .4));
+    background: -o-linear-gradient(34deg, rgba(255, 255, 51, .4), rgba(255, 153, 51, .4), rgba(0, 102, 255, .4), rgba(51, 255, 153, .4));
     background: linear-gradient(34deg, rgba(255, 255, 51, .4), rgba(255, 153, 51, .4), rgba(0, 102, 255, .4), rgba(51, 255, 153, .4));
-    background-size: 100%;
+    background: -moz-linear-gradient(transparent, transparent);
     -webkit-background-clip: text;
+    background-size: 100%;
+    -webkit-text-fill-color: transparent;
 }
 
 .user-name {
-    margin-top: 1em;
     font-size: 80px;
+    margin-top: 1em;
     letter-spacing: .1em;
     word-spacing: .6em;
-    color: transparent;
 }
 
 .user-greet {
     font-size: 24px;
     margin-top: 1em;
-    color: transparent;
 }
 
 
 /*search*/
 
 .search-wrap {
-    background-color: rgba(255, 255, 255, .4);
     border-radius: 4px;
+    background-color: rgba(255, 255, 255, .4);
     box-shadow: inset 0 0 3px rgba(0, 0, 0, .2);
 }
 
 .search-ipt {
-    background-color: transparent;
     width: 600px;
+    background-color: transparent;
 }
+
 
 /*animate*/
 
 @-webkit-keyframes bg-generator {
     0% {
-        background-position: 0% 84%;
+        background-position: 0 84%;
     }
     50% {
         background-position: 100% 17%;
     }
     100% {
-        background-position: 0% 84%;
+        background-position: 0 84%;
     }
 }
 
 @keyframes bg-generator {
     0% {
-        background-position: 0% 84%;
+        background-position: 0 84%;
     }
     50% {
         background-position: 100% 17%;
     }
     100% {
-        background-position: 0% 84%;
+        background-position: 0 84%;
+    }
+}
+
+@-moz-keyframes bg-generator {
+    0% {
+        background-position: 0 84%;
+    }
+    50% {
+        background-position: 100% 17%;
+    }
+    100% {
+        background-position: 0 84%;
+    }
+}
+
+@-o-keyframes bg-generator {
+    0% {
+        background-position: 0 84%;
+    }
+    50% {
+        background-position: 100% 17%;
+    }
+    100% {
+        background-position: 0 84%;
     }
 }
