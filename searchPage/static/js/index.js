@@ -7,7 +7,18 @@
 ! function(win, doc, undefined) {
     'use strict';
     var $main = doc.querySelector('#main'),
-        _user_obj = JSON.parse(decodeURI(win.location.href.split('?')[1])),
+        // _user_obj = JSON.parse(decodeURI(win.location.href.split('?')[1])),
+        _user_obj = (function() {
+            var str = win.location.href.split('?')[1];
+            if (str) {
+                return JSON.parse(decodeURI(str));
+            } else {
+                return {
+                    name: 'userName',
+                    animate: 'true'
+                }
+            }
+        })(),
         // 粒子动画相应参数与方法
         $canvas = doc.querySelector('#bgAnimate'), // canvas Dom节点
         ctx = $canvas.getContext('2d'), // canvas 2d 上下文
@@ -144,6 +155,8 @@
         // 搜索框相应参数与方法
         now = new Date(), //
         $ipt = $main.querySelector('.search-ipt'), // 输入框Dom
+        $chrome = $main.querySelector('.js-chrome'),
+        $baidu = $main.querySelector('.js-baidu'),
         _ipt_time = {
             time1: null,
             time2: null
@@ -174,34 +187,46 @@
                 } else {
                     return 'Good evening';
                 }
+            },
+            getValArr: function() {
+                return $ipt.value.replace(/(^\s*)|(\s*$)/g, '').split(/\s+/);
+            },
+            start: function(e) {
+                e = e || win.event;
+                if ((e.keyCode || e.which) === 13) {
+                    if (_ipt_time.time1) {
+                        _ipt_time.time2 = new Date().getTime();
+                    } else {
+                        _ipt_time.time1 = new Date().getTime();
+                        var _time = setTimeout(function() {
+                            clearTimeout(_time);
+                            if (_ipt_time.time2 && (_ipt_time.time2 - _ipt_time.time1 < 320)) {
+                                SEARCH.chrome();
+                            } else {
+                                SEARCH.baidu();
+                            }
+                            _ipt_time.time1 = null;
+                            _ipt_time.time2 = null;
+                        }, 340);
+                    }
+                }
+            },
+            chrome: function() {
+                win.location.href = 'https://www.google.com/#q=' + SEARCH.getValArr().join('+');
+            },
+            baidu: function() {
+                win.location.href = 'https://www.baidu.com/s?ie=UTF-8&wd=' + encodeURI(SEARCH.getValArr().join(' '));
             }
         };
 
     /**
      * 搜索框
      */
-    SEARCH.init();
-    addEvent($ipt, 'keydown', function(e) {
-        e = e || win.event;
-        if ((e.keyCode || e.which) === 13) {
-            var _val = $ipt.value.replace(/(^\s*)|(\s*$)/g, '').split(/\s+/);
-            if (_ipt_time.time1) {
-                _ipt_time.time2 = new Date().getTime();
-            } else {
-                _ipt_time.time1 = new Date().getTime();
-                var _time = setTimeout(function() {
-                    clearTimeout(_time);
-                    if (_ipt_time.time2 && (_ipt_time.time2 - _ipt_time.time1 < 320)) {
-                        win.location.href = 'https://www.google.com/#q=' + _val.join('+');
-                    } else {
-                        win.location.href = 'https://www.baidu.com/s?ie=UTF-8&wd=' + _val.join('%20');
-                    }
-                    _ipt_time.time1 = null;
-                    _ipt_time.time2 = null;
-                }, 340);
-            }
-        }
-    });
+    SEARCH.init(); // 搜索初始化
+    addEvent($ipt, 'keydown', SEARCH.start); // 用户搜索
+    addEvent($chrome, 'click', SEARCH.chrome); // 点击谷歌
+    addEvent($baidu, 'click', SEARCH.baidu); // 点击百度
+
     /**
      * 动画
      */
