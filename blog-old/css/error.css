@@ -1,0 +1,110 @@
+@charset 'utf-8';
+.error-index {
+    font-size: 22px;
+    line-height: 46px;
+    z-index: 2;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #f00;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, .6);
+}
+
+.error-index:hover {
+    background-color: #fff;
+}
+
+#error-bg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.error-bg {
+    -webkit-transform: rotateY(360deg) rotate(45deg);
+    transform: rotateY(360deg) rotate(45deg);
+}
+
+#error-bg:before {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #f00;
+}
+
+#error-bg:after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    content: '';
+    background-color: #f00;
+}
+
+#error-one,
+#error-two,
+#error-three,
+#error-four {
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 50%;
+}
+
+.one,
+.two,
+.three,
+.three {
+    position: absolute;
+}
+
+.one {
+    right: 50px;
+    bottom: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+.two,
+.three {
+    font-size: 100px;
+    height: 100px;
+    color: #f00;
+}
+
+.two {
+    bottom: 20px;
+    left: 20px;
+}
+
+.three {
+    top: 20px;
+    right: 20px;
+}
+
+.four {
+    font-size: 35px;
+    line-height: 115px;
+    height: 100px;
+    margin: 20px;
+    color: #0c9;
+}
+
+@media only screen and (max-width: 500px) {
+    .error-bg {
+        -webkit-transform: rotateY(360deg) rotate(360deg) scale(.6);
+        transform: rotateY(360deg) rotate(360deg) scale(.6);
+    }
+    .two,
+    .three {
+        font-size: 60px;
+    }
+}

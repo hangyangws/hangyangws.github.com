@@ -1,0 +1,114 @@
+@charset 'utf-8';
+
+.pln {
+	color:#3cc
+}
+
+@media screen {
+
+	.str,.atv{
+		color:#cc6
+	}
+
+	.kwd,.tag {
+			color:#c33
+		}
+
+	.com {
+			color:#666
+		}
+
+	.typ {
+			color:#ccc
+		}
+
+	.lit {
+			color:#96c
+		}
+
+	.pun,.opn,.clo {
+			color:#fff
+		}
+
+
+	.atn {
+			color:#6c6
+		}
+
+	.dec,.var {
+			color:#fff
+		}
+
+	.fun {
+			color:#fff
+		}
+}
+
+@media print,projection {
+
+	.str {
+		color:#060
+	}
+
+	.kwd {
+			color:#006;
+			font-weight:bold
+		}
+
+	.com {
+			color:#600;
+			font-style:italic
+		}
+
+	.typ {
+			color:#404;
+			font-weight:bold
+		}
+
+	.lit {
+			color:#044
+		}
+
+	.pun,.opn,.clo {
+			color:#440
+		}
+
+	.tag {
+			color:#006;
+			font-weight:bold
+		}
+
+	.atn {
+			color:#404
+		}
+
+	.atv {
+			color:#060
+		}
+}
+
+ol.linenums {
+	margin-top:0;
+	margin-bottom:0
+}
+
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 {
+	list-style-type:none
+}
+
+li.L1,li.L3,li.L5,li.L7,li.L9 {
+	background:#eee
+}
+
+pre.prettyprint  {
+	border: 0;
+	border-left: 3px solid #0c9;
+	padding: 10px;
+	font-size: 18px;
+	display: block;
+	font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+	margin: 1em 0px;
+	width: 94%;
+	background-color: #666;
+	white-space: pre-wrap
+}

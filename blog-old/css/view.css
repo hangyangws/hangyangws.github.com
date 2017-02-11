@@ -1,0 +1,145 @@
+@charset 'utf-8';
+#home {
+    position: absolute;
+    z-index: 1;
+    top: 150px;
+    right: 0;
+    display: block;
+    width: 24px;
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #b1d85c;
+}
+
+.article-container {
+    position: relative;
+    width: 75%;
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 25px;
+    padding-bottom: 56px;
+    background-color: #fff;
+}
+
+article {
+    overflow: hidden;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+}
+
+aside {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid #999;
+}
+
+#loadMask {
+    display: block;
+}
+
+article h1[data-role],
+article h3[data-role] {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+article h1[data-role] {
+    font-size: 26px;
+    line-height: 40px;
+    height: 40px;
+    margin: 0 0 10px 0;
+    color: #0c9;
+}
+
+article h1[data-role]:before {
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    width: 5px;
+    height: 25px;
+    margin-right: 5px;
+    content: ' ';
+    background-color: #0c9;
+}
+
+article h2 {
+    margin: 0 0 8px 0;
+}
+
+article h2:before {
+    font-size: 14px;
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    margin: 0 3px 0 28px;
+    content: '●';
+    color: #0c9;
+}
+
+article h3[data-role] {
+    font-size: 16px;
+    line-height: 22px;
+    height: 22px;
+    margin: 0 0 8px 0;
+    color: #666;
+}
+
+article h3[data-role]:before {
+    margin-left: 15px;
+    content: '— — —'open-quote;
+}
+
+article h3[data-role]:after {
+    content: close-quote;
+}
+
+aside {
+    font-family: 'hyTextIcon';
+    position: relative;
+    overflow: auto;
+    overflow-y: hidden;
+    padding: 0 15px;
+    padding-top: 5px;
+    border-top: 1px solid #999;
+}
+
+.view,
+.like,
+.share {
+    font-size: 24px;
+    line-height: 24px;
+    display: inline-block;
+    height: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.view:hover,
+.like:hover,
+.share:hover {
+    color: #0c9;
+}
+
+.like > em {
+    font-size: 16px;
+    font-style: normal;
+    line-height: 32px;
+    display: inline-block;
+    float: right;
+}
+
+@media only screen and (max-width: 900px) {
+    .article-container,
+    #paging {
+        width: 100%;
+    }
+}

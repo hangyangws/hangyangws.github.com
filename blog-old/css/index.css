@@ -1,0 +1,322 @@
+@charset 'utf-8';
+
+/*head*/
+
+.hy-head {
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
+    min-width: 380px;
+    height: 120px;
+    padding: 0 60px;
+}
+
+.hy-head-logo {
+    width: 120px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.hy-head-slogan {
+    line-height: 20px;
+    overflow: hidden;
+    width: 400px;
+    height: 70px;
+    padding: 50px 0 0 0;
+    text-align: center;
+    color: #999;
+}
+
+#search {
+    display: none;
+    margin-top: 45px;
+}
+
+.search-change {
+    position: absolute;
+    left: 38px;
+}
+
+
+/*view content*/
+
+.hy-view {
+    z-index: 2;
+    min-height: 280px;
+    margin: 0;
+    text-align: center;
+    background: url('../img/mainBG.jpg') bottom;
+    background-size: cover;
+}
+
+.hy-view-label {
+    font-size: 40px;
+    line-height: 40px;
+    height: 40px;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(102, 255, 204, .5);
+}
+
+#start {
+    position: absolute;
+    bottom: 50px;
+    left: 48%;
+    left: calc(50% - 15px);
+    width: 30px;
+    height: 20px;
+    padding-top: 10px;
+    border: 1px solid #fff;
+}
+
+#start:hover {
+    bottom: 45px;
+}
+
+
+/*hy-main*/
+
+.hy-main {
+    z-index: 1;
+    display: none;
+    min-height: 315px;
+    margin: 0;
+    background: url('../img/mainBG.jpg') top;
+    background-size: cover;
+}
+
+#hideSkill {
+    position: absolute;
+    z-index: 999;
+    bottom: 20px;
+    left: 25px;
+    display: none;
+}
+
+#showFooter {
+    position: absolute;
+    z-index: 999;
+    right: 60px;
+    bottom: 20px;
+}
+
+.hy-main-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 100%;
+}
+
+#skill {
+    position: absolute;
+    top: 120px;
+    bottom: 70px;
+    overflow-y: auto;
+    width: 147px;
+    text-align: right;
+    color: #fff;
+}
+
+#skill li {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 40px;
+    overflow: hidden;
+    margin-right: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-shadow: 0 0 8px #000;
+}
+
+#skill li:hover {
+    letter-spacing: 1px;
+}
+
+.skill-click {
+    font-size: 22px;
+    padding: 8px;
+    color: #0c9;
+}
+
+.hy-main-content {
+    position: absolute;
+    right: 0;
+    left: 180px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.hy-main-content-full {
+    left: 0;
+}
+
+
+/*articles*/
+
+.articles-bg {
+    position: absolute;
+    right: 60px;
+    left: 0;
+    overflow: hidden;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+#guide {
+    font-size: 16px;
+    line-height: 30px;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+}
+
+#guide > span {
+    position: relative;
+    top: 5px;
+    color: #fff;
+}
+
+.articlesWrap-bg {
+    position: absolute;
+    top: 120px;
+    bottom: 70px;
+    display: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.article-container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 12px;
+    padding: 12px;
+    color: #333;
+    background-color: #fff;
+}
+
+.article-container:first-child {
+    margin-top: 0;
+}
+
+article {
+    overflow: hidden;
+    width: 100%;
+    height: 80px;
+}
+
+article h1,
+article h3 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+article h1,
+article h1 a {
+    font-size: 26px;
+    line-height: 40px;
+    height: 40px;
+    margin: 0 0 10px 0;
+    color: #0c9;
+}
+
+article h1:before {
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    width: 5px;
+    height: 25px;
+    margin-right: 5px;
+    content: ' ';
+    background-color: #0c9;
+}
+
+article h3 {
+    font-size: 16px;
+    line-height: 22px;
+    height: 22px;
+    margin: 0 0 8px 0;
+    color: #666;
+}
+
+article h3:before {
+    margin-left: 15px;
+    content: '— — —'open-quote;
+}
+
+article h3:after {
+    content: close-quote;
+}
+
+aside {
+    font-family: 'hyTextIcon';
+    position: relative;
+    overflow: auto;
+    overflow-y: hidden;
+    padding: 0 15px;
+    padding-top: 5px;
+    border-top: 1px solid #999;
+}
+
+.view,
+.like,
+.share {
+    font-size: 24px;
+    line-height: 24px;
+    display: inline-block;
+    height: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.view:hover,
+.like:hover,
+.share:hover,
+#footer > div a:hover {
+    color: #0c9;
+}
+
+.like > em {
+    font-size: 16px;
+    font-style: normal;
+    line-height: 32px;
+    display: inline-block;
+    float: right;
+}
+
+
+/*footer*/
+
+footer {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    color: #fff;
+    background-color: #333;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+#footer > div {
+    text-align: center;
+}
+
+#footer > div a {
+    color: #fff;
+}
+
+.footer-show {
+    height: auto;
+    padding: 30px 0 20px;
+}
+
+#hideFooter {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+}

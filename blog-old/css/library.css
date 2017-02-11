@@ -1,0 +1,420 @@
+@charset 'utf-8';
+
+/*font*/
+
+@font-face {
+    font-family: 'hyText';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../font/hyText.ttf?fa9nyq') format('truetype');
+}
+
+@font-face {
+    font-family: 'hyTextIcon';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../font/hyTextIcon.eot?fa9nyq');
+    src: url('../font/hyTextIcon.eot?#iefixfa9nyq') format('embedded-opentype'), url('../font/hyTextIcon.woff?fa9nyq') format('woff'), url('../font/hyTextIcon.ttf?fa9nyq') format('truetype'), url('../font/hyTextIcon.svg?fa9nyq#hyTextIcon') format('svg');
+}
+
+.font {
+    font-family: 'hyText', 'STXihei', Arial, 'Microsoft YaHei';
+    -webkit-font-smoothing: antialiased;
+}
+
+.english-font {
+    font-family: 'STXihei', Arial, 'Microsoft YaHei';
+}
+
+
+/*public*/
+
+html,
+#body {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/*scroll bar*/
+
+body {
+    scrollbar-face-color: #666;
+    scrollbar-highlight-color: #ccc;
+    scrollbar-shadow-color: #666;
+    scrollbar-3dlight-color: #ccc;
+    scrollbar-arrow-color: #ccc;
+    scrollbar-track-color: #ccc;
+    scrollbar-darkshadow-color: #666;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ccc;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0c9;
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    background-color: #ccc;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+
+/*placeholder and input*/
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #9fc;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+    color: #9fc;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    color: #9fc;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #9fc;
+}
+
+
+/*text over*/
+
+.text-over {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*selection*/
+
+::-moz-selection {
+    color: #fff;
+    background: #0c9;
+}
+
+::selection {
+    color: #fff;
+    background: #0c9;
+}
+
+
+/*float direction*/
+
+.toright {
+    float: right;
+}
+
+.toleft {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
+
+/*arrows*/
+
+.arrows {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    border: 10px solid transparent;
+}
+
+.arrows-left {
+    border-right-color: #fff;
+}
+
+.arrows-left:hover {
+    border-right-color: #0c9;
+}
+
+.arrows-right {
+    border-left-color: #fff;
+}
+
+.arrows-right:hover {
+    border-left-color: #0c9;
+}
+
+.arrows-down {
+    border-top-color: #fff;
+}
+
+.arrows-down:hover {
+    border-top-color: #0c9;
+}
+
+.arrows-top {
+    border-bottom-color: #fff;
+}
+
+.arrows-top:hover {
+    border-bottom-color: #0c9;
+}
+
+
+/*transtion*/
+
+.transtion {
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+
+
+/*redius*/
+
+.radius {
+    border-radius: 50%;
+}
+
+
+/*blur*/
+
+.blur {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+
+/*input*/
+
+.inputContainer {
+    width: 400px;
+    height: 30px;
+}
+
+.inputContainer > input {
+    font-family: Arial, 'Microsoft YaHei';
+    font-size: 15px;
+    float: left;
+    width: 350px;
+    height: 30px;
+    padding: 0 10px;
+    letter-spacing: 2px;
+    color: #fff;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.input {
+    font-family: Arial, 'Microsoft YaHei';
+    border: none;
+    outline: none;
+}
+
+.inputContainer > input:hover,
+.inputContainer > input:focus {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.inputContainer > span {
+    float: right;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #0c9;
+}
+
+.inputContainer > span > span {
+    position: relative;
+    display: block;
+    width: 13px;
+    height: 13px;
+    margin: 6px 0 0 6px;
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+.inputContainer > span:hover > span,
+.inputContainer > span:hover > span:after {
+    border-color: #333;
+}
+
+.inputContainer > span > span:after {
+    position: absolute;
+    top: 11px;
+    right: -1px;
+    width: 0;
+    height: 8px;
+    content: '';
+    -webkit-transform: rotate(-38deg);
+    transform: rotate(-38deg);
+    border-right: 1px solid #fff;
+}
+
+.just-input {
+    border: none;
+    outline: none;
+}
+
+
+/*absolute middle*/
+
+.middle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+
+/*display none*/
+
+.hide {
+    display: none;
+}
+
+
+/*text over*/
+
+.text-over {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*mask*/
+
+#loadMask {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+
+/*loading*/
+
+.load-wrap {
+    width: 100%;
+    height: 100px;
+}
+
+
+/*remaind*/
+
+.remaind-wrap {
+    width: 300px;
+    height: 125px;
+    text-align: center;
+}
+
+#remaindMessage {
+    display: block;
+    height: 50px;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+#confirmRemaind {
+    font-size: 20px;
+    line-height: 35px;
+    display: block;
+    height: 35px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    color: #333;
+    background-color: #999;
+}
+
+#confirmRemaind:hover {
+    background-color: #ccc;
+}
+
+
+/*border-box*/
+
+.border-box {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/*empty data*/
+
+.empty-data {
+    font-size: 20px;
+    display: block;
+    margin: 50px 0;
+    text-align: center;
+    color: #fff;
+}

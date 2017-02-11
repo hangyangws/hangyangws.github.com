@@ -1,0 +1,189 @@
+@charset 'utf-8';
+
+/*choice*/
+
+#optionChoice {
+    height: 130px;
+    text-align: center;
+}
+
+#optionChoice > span {
+    font-size: 22px;
+    line-height: 34px;
+    display: block;
+    width: 120px;
+    height: 34px;
+    margin: 0 auto;
+    margin-bottom: 12px;
+    cursor: pointer;
+    color: #333;
+    background-color: #fff;
+}
+
+#optionChoice > span,
+#optionPublish > form > input[type='submit'],
+.option-back {
+    box-shadow: 0 0 1px 1px #ccc;
+}
+
+#optionChoice > span:last-child {
+    border-bottom: 0;
+}
+
+
+/*publish*/
+
+#optionPublish,
+#optionOperate {
+    display: none;
+    overflow-y: auto;
+    width: 80%;
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #666;
+}
+
+.option-back,
+#optionPublish > form > input[type='submit'] {
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+    text-align: center;
+    color: #333;
+    border: none;
+    outline: none;
+    background-color: #fff;
+}
+
+#optionPublish > form > input[type='button'] {
+    cursor: pointer;
+    text-align: left;
+    color: #9fc;
+}
+
+#optionPublish > form,
+#deleteList {
+    display: block;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+#optionPublish > form > input {
+    font-size: 20px;
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+    color: #fff;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+#optionPublish > form > input {
+    border-bottom: 1px solid #999;
+}
+
+#optionPublish > form > input[type='submit']:hover,
+.option-back:hover,
+#optionChoice > span:hover,
+.delete:hover {
+    background-color: #ccc;
+}
+
+#fallPageChoice {
+    position: relative;
+    top: 45%;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+}
+
+#fallPageChoice > span,
+#addTypeItem {
+    display: inline-block;
+    height: 34px;
+    margin: 0 10px 10px 0;
+    padding: 0 10px;
+    color: #0c9;
+    background-color: rgba(255, 255, 255, .1);
+}
+
+#fallPageChoice > span[id='addType'] {
+    width: 34px;
+    padding: 0;
+}
+
+#fallPageChoice > span {
+    font-size: 24px;
+    line-height: 34px;
+    cursor: pointer;
+}
+
+#fallPageChoice > span:last-child {
+    margin-right: 0;
+}
+
+#addTypeItem {
+    font-size: 20px;
+    position: relative;
+    top: -2px;
+    display: none;
+}
+
+#fallPageChoice > span:hover,
+#addTypeItem:hover,
+#addTypeItem:focus {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+
+/*operate*/
+
+#deleteList > li {
+    font-size: 16px;
+    display: block;
+    height: 20px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #999;
+}
+
+#deleteList > li:before {
+    float: left;
+    content: '♥';
+    color: #fff;
+}
+
+.title {
+    overflow: hidden;
+    width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #9fc;
+}
+
+.title:hover {
+    color: #0c9;
+}
+
+.delete {
+    padding: 0 5px;
+    cursor: pointer;
+    color: #f00;
+    background-color: #fff;
+}
+
+
+/*media*/
+
+@media only screen and ( max-width: 600px) {
+    #optionPublish,
+    #optionOperate {
+        width: 100%;
+    }
+    .title {
+        width: 40%;
+    }
+}

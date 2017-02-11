@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta charset="UTF-8" />
+    <title>航洋-未找到页面</title>
+    <meta name="author" content="@echo冯杰,hangyangws,www.hangyangws.sinaapp.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="yes" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="x5-page-mode" content="app" />
+    <meta name="browsermode" content="application" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="shortcut icon" type="image/png" href="img/title_icon.png" />
+    <link rel="stylesheet" href="css/library.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/error.css" />
+    <!--[if lt IE 10]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script>window.location.href = 'ie.html';</script>
+    <![endif]-->
+</head>
+
+<body id="body">
+    <a href="index.html" class="error-index middle radius font transtion">返回</a>
+    <div id="error-bg" class="font transtion animated">
+        <div id="error-one" class="border-box">
+            <div class="one">
+                <div class="sk-spinner sk-spinner-wandering-cubes">
+                    <div class="sk-cube1"></div>
+                    <div class="sk-cube2"></div>
+                </div>
+            </div>
+        </div>
+        <div id="error-two" class="border-box animated">
+            <div class="two">404</div>
+        </div>
+        <div id="error-three" class="border-box animated">
+            <div class="three">SORRY</div>
+        </div>
+        <div id="error-four" class="border-box">
+            <div class="four">没有你搜索的页面</div>
+        </div>
+    </div>
+    <script src="js/jq.js"></script>
+    <script>
+    ;
+    (function($) {
+
+        setTimeout(function() {
+
+            $('#error-bg').addClass('shake').delay(1200).show(function() {
+                $(this).removeClass('shake').show(function() {
+                    $(this).addClass('error-bg');
+                });
+            });
+        }, 200);
+    })(jQuery);
+    </script>
+</body>
+
+</html>

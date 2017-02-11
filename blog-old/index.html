@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta charset="UTF-8" />
+    <title>航洋-BLOG</title>
+    <meta name="description" content="航洋无声,前端博客" />
+    <meta name="keywords" content="HTML,CSS,JavaScript" />
+    <meta name="author" content="hangyangws &copy;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="robots" content="index,follow" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="yes" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="x5-page-mode" content="app" />
+    <meta name="browsermode" content="application" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- icon -->
+    <link rel="shortcut icon" type="image/png" href="img/title_icon.png" />
+    <!-- public -->
+    <link rel="stylesheet" href="css/library.css" />
+    <!-- libary -->
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <!-- this -->
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/index-media.css" />
+    <!--[if lt IE 10]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script>window.location.href = 'ie.html';</script>
+    <![endif]-->
+</head>
+
+<body id="body">
+    <!-- head -->
+    <header id="head" class="hy-head transtion">
+        <div id="logo" class="hy-head-logo toleft animated fadeInLeft" title="hangyangws/go to index page"></div>
+        <ul id="carousel" class="hy-head-slogan toright english-font">
+            <li>拥挤的列车 请你带走我 没有挥手 她没有回眸</li>
+            <li>当我离开这世界 我愿是一块不说话的石头</li>
+            <li>朋友再见 不要将我怀念 你是我一生的眷恋</li>
+            <li>你在夕阳下 我在夜幕里 告别了匆匆的你</li>
+            <li>我的世界因你而改变 不再平凡 不再停歇</li>
+            <li>我很久没有出去走走 我以为这就是世界</li>
+            <li>Beyond the horizon and never say never</li>
+            <li>你多久没有看到星星 城市虚伪的光明遮住了你的眼睛</li>
+            <li>今年燕子来 谁听呢喃语 不见眷恋人 一阵黄昏雨</li>
+        </ul>
+        <div id="search" class="toright transtion inputContainer animated">
+            <input class="transtion" type="text" placeholder="搜索/Search" title="关键字以空格分开/Keywords separated by spaces" />
+            <span title="搜索/Search"><span class="radius transtion"></span></span>
+        </div>
+    </header>
+    <!-- welcome page -->
+    <div id="welcome" class="transtion hy-view animated font middle">
+        <h1 class="hy-view-label transtion animated middle">HANGYANGWS</h1>
+        <div id="start" class="transtion radius" title="欢迎/Look forward to your arrival">
+            <span class="transtion arrows arrows-down"></span>
+        </div>
+    </div>
+    <!-- content -->
+    <div id="main" class="transtion hy-main middle animated">
+        <nav id="skillBar" class="hy-main-sidebar animated fadeInLeft">
+            <ul id="skill" class="animated font"></ul>
+        </nav>
+        <div id="hideSkill" class="transtion arrows arrows-left animated" title="隐藏/hide"></div>
+        <div id="showFooter" class="transtion arrows arrows-top animated" title="显示 页脚/show footer"></div>
+        <div class="hy-main-content transtion english-font">
+            <div class="articles-bg">
+                <div id="guide" class="middle" title="左边 导航栏 分类选择/Choose what you want from the left">
+                    <span class="arrows arrows-left transtion"></span> 选择你感兴趣的/Choose what you like
+                </div>
+                <div class="articlesWrap-bg">
+                    <div id="articles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer id="footer" class="transtion font">
+        <div id="hideFooter" class="transtion arrows arrows-down animated" title="隐藏 页脚/hide footer"></div>
+        <div title="我的微博">About me : <a href="http://weibo.com/512jj" target="_blank" class="transtion">@hangyangws</a></div>
+        <div>&copy; 2015 - 2017 <a href="" class="transtion">hangyangws</a> All Rights Reserved</div>
+    </footer>
+    <!-- load mask -->
+    <div id="loadMask"></div>
+    <!-- base -->
+    <script src="js/jq.js"></script>
+    <!-- libary -->
+    <script src="js/rapheal.js"></script>
+    <script src="js/public.js"></script>
+    <!-- this -->
+    <script src="js/index.js"></script>
+    <script>
+    // logo start
+    Raphael(function() {
+
+        var paper = Raphael('logo', 120, 120),
+            firstPoint = 0,
+            changeAngel = 0,
+            path = [],
+            cicrl = paper.circle(60, 60, 2).animate({
+                fill: '#0c9',
+                stroke: '#0c9',
+                'stroke-width': 50
+            }, 2000, 'elastic');
+
+        path[0] = paper.path("M37 60L83 60").attr({
+            "stroke-width": 1,
+            stroke: '#fff'
+        });
+        path[1] = paper.path("M37 60L83 60").attr({
+            "stroke-width": 1,
+            stroke: '#fff'
+        });
+        path[2] = paper.path("M37 60L83 60").attr({
+            "stroke-width": 1,
+            stroke: '#fff'
+        });
+
+        document.onmousemove = function(e) {
+            e = e || window.event;
+
+            if (firstPoint === 0) {
+                firstPoint = e.clientX;
+                return;
+            };
+
+            changeAngel += e.clientX - firstPoint;
+
+            path[0].attr({
+                transform: "r" + changeAngel
+            });
+            path[1].attr({
+                transform: "r" + changeAngel / 1.1
+            });
+            path[2].attr({
+                transform: "r" + changeAngel / 1.2
+            });
+
+            firstPoint = e.clientX;
+        }
+    });
+    </script>
+</body>
+
+</html>

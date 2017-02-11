@@ -1,0 +1,45 @@
+@charset 'utf-8';
+@media only screen and (max-width: 1000px) {
+    .article-container,
+    #paging {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .hy-head {
+        padding: 0;
+    }
+    #skill {
+        width: 114px;
+        margin-left: 33px;
+        text-align: left;
+    }
+    #hideSkill {
+        display: block;
+    }
+    .articles-bg {
+        right: 0;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    .inputContainer {
+        width: 200px;
+    }
+    .inputContainer > input {
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .hy-head-slogan {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .hy-view-label {
+        font-size: 20px;
+    }
+}
