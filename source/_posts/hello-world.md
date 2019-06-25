@@ -1,6 +1,10 @@
 ---
 title: Hello World
+photos: [
+  ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmriIywIw2pUNaVMIdbNLMsQBp7ywi_1vpwgRKTifGwhv8r9Ku"]
+]
 ---
+
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
 ## Quick Start
