@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: ocean
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +81,10 @@ deploy:
   type: git
   repo: https://github.com/hangyangws/hangyangws.github.com.git
   branch: master
+
+# hexo-generator-searchdb@1.0.8
+search:
+  path: search.xml
+  field: post
+  format: html
+  content: true
