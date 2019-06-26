@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="javascript,css,html,算法,前端">
+  
+  
+    <meta name="description" content="愿原力与你同在_friday.fj">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    stylelint 搭配 stylelint-order，更随心所欲的编码 CSS |
+    
+    航洋</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article
+  id="post-stylelint"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      stylelint 搭配 stylelint-order，更随心所欲的编码 CSS
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/06/27/stylelint/" class="article-date">
+  <time datetime="2019-06-27T01:15:38.000Z" itemprop="datePublished">2019-06-26</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h2 id="为什么需要校验-CSS-规则"><a href="#为什么需要校验-CSS-规则" class="headerlink" title="为什么需要校验 CSS 规则"></a>为什么需要校验 CSS 规则</h2><p>对于编程语言进行「语法、书写」校验，能有效「归并」不同开发者的「不同风格」，还能检验出一些语法错误。<br>比如 <a href="https://github.com/eslint/eslint" target="_blank" rel="noopener">eslint</a> 就能校验 JS 代码的「鸡肋糟粕」。<br>对于 CSS 而言，不能算是严格意义的「编程语言」，但是在前端体系中却不能小觑。<br>CSS 是以描述为主的「样式表」，如果「描述」得「混乱、没有规则」，对于其他开发者一定是一个「定时炸弹 💣『特别是有强迫症的人群 😊』」<br>CSS 看似简单，想要写出漂亮的 CSS 还是相当困难。<a href="https://zhuanlan.zhihu.com/p/29888231" target="_blank" rel="noopener">CSS 为什么这么难学？ - CSS 不是科学，而是艺术</a><br>所以校验 CSS 规则的行动迫在眉睫，立即执行。</p>
+<a id="more"></a>
+
+<h2 id="团队协作在-CSS-书写遇到的问题"><a href="#团队协作在-CSS-书写遇到的问题" class="headerlink" title="团队协作在 CSS 书写遇到的问题"></a>团队协作在 CSS 书写遇到的问题</h2><p>请看以下场景：</p>
+<p>小冯：你的 CSS 为什么不把 <code>0.1</code> 写成 <code>.1</code><br>小杰：CSS 解析器一样能识别，不好较真好么<br>小冯：好吧 😨，那为什么你的逗号后面没有空格，我看着很难受啊<br>小杰：我看着不难受就好<br>小冯：😨😨😨，那你能不能不要新建一个空的 CSS 文件啊！！！<br>…</p>
+<p>不论是在社区、MR、平时交流中，相似的场景层出不穷，<br>这就是因为 CSS 规则不统一，导致的弊端「冰山一角」</p>
+<h2 id="CSS-哪些东西需要校验"><a href="#CSS-哪些东西需要校验" class="headerlink" title="CSS 哪些东西需要校验"></a>CSS 哪些东西需要校验</h2><p>单纯从代码层面来说，CSS 校验的东西其实蛮少的。<br>比如：属性顺序、小于 1 的小数要不要去掉 0、选择器之间要不要加空格…<br>不过要细细的追究，校验的东西还是挺多的，比如 <a href="https://stylelint.io/user-guide/rules/#list-of-rules" target="_blank" rel="noopener">List of rules</a> 列出了好多需要校验的规则。</p>
+<p>叮叮叮<del>~</del>，有个东西要说一下，CSS 语言本身对「规则」不敏感，几乎是你想怎么写就怎么写，只要合乎「语法」。</p>
+<h2 id="怎么校验-CSS-规则"><a href="#怎么校验-CSS-规则" class="headerlink" title="怎么校验 CSS 规则"></a>怎么校验 CSS 规则</h2><p>首先得有一个规则，其次开发者得遵守规则。<br>如何遵守：</p>
+<ol>
+<li>提交 「Merge Request」的时候，以「Code Review」的形式「人工校验」。「好蠢啊，费时费力，效果差」</li>
+<li><code>git commit</code> 的时候「自动校验」，校验通过才能提交成功「(＾－＾)V 真好<del>~</del>」</li>
+</ol>
+<h3 id="通过-stylelint-校验-CSS-规则"><a href="#通过-stylelint-校验-CSS-规则" class="headerlink" title="通过 stylelint 校验 CSS 规则"></a>通过 stylelint 校验 CSS 规则</h3><h4 id="简单步骤"><a href="#简单步骤" class="headerlink" title="简单步骤"></a>简单步骤</h4><ul>
+<li>安装 <a href="https://github.com/stylelint/stylelint" target="_blank" rel="noopener">stylelint</a>、<a href="https://github.com/hudochenkov/stylelint-order" target="_blank" rel="noopener">stylelint-order</a>、<a href="https://github.com/stylelint/stylelint-config-standard" target="_blank" rel="noopener">stylelint-config-standard</a></li>
+</ul>
+<p><code>npm i --save-dev stylelint stylelint-order stylelint-config-standard</code></p>
+<ul>
+<li>增加 stylelint 配置文件</li>
+</ul>
+<p>项目根目录添加文件 <code>.stylelintrc</code> 基本配置文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"extends"</span>: <span class="string">"stylelint-config-standard"</span>,</span><br><span class="line">  <span class="attr">"plugins"</span>: [],</span><br><span class="line">  <span class="attr">"rules"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体的配置文件内容，欢迎参考：<a href="https://raw.githubusercontent.com/hangyangws/article/master/src/data/.stylelintrc" target="_blank" rel="noopener">点我呀</a><br>注：配置文件使用的 CSS 属性排序规则来自 <a href="https://github.com/Wizard67/note-css-order#properties-属性" target="_blank" rel="noopener">这里</a></p>
+<ul>
+<li>在 package.json 的 scripts 字段中添加相关命令</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"lint-css"</span>: <span class="string">"stylelint 'src/**/*.css' --fix"</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以手动执行 <code>npm run lint-css</code> 校验 CSS 了。<br><code>&#39;src/**/*.css&#39;</code> 以 glob 语法表示 CSS 文件的路径。<br><code>--fix</code> 表示让 stylelint 尽可能的自动修复 CSS 代码「部分规则还是需要抛出错误，开发者手动修复」</p>
+<ul>
+<li>安装 <a href="https://github.com/okonet/lint-staged" target="_blank" rel="noopener">lint-staged</a>、<a href="https://github.com/typicode/husky" target="_blank" rel="noopener">husky</a></li>
+</ul>
+<p><code>npm i --save-dev lint-staged husky</code></p>
+<ul>
+<li>增加 lint-staged 配置文件</li>
+</ul>
+<p>项目根目录添加文件 <code>.lintstagedrc</code> 基本配置文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"src/**/*.css"</span>: [</span><br><span class="line">    <span class="string">"stylelint --fix"</span>,</span><br><span class="line">    <span class="string">"git add"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就会在执行 <code>git commit</code> 之前会自动以 <code>stylelint --fix</code> 的方式校验 <code>src/**/*.css</code> CSS 文件</p>
+<h4 id="stylelint-的更多使用方式"><a href="#stylelint-的更多使用方式" class="headerlink" title="stylelint 的更多使用方式"></a>stylelint 的更多使用方式</h4><p>stylelint 不仅仅可以用于项目中，还可以用于编辑器，比如「Sublime Text」，详细使用规则，这里不赘述。 <a href="https://stylelint.io/" target="_blank" rel="noopener">移步阅读</a></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>虽然有各种各样的工具能「辅佐」开发者工作，注意，是「辅佐」不是「帮助」。<br>因为开发者自己需要明确「为什么」要这样校验，我们不能被工具「牵着鼻子走」，是我们「命令」工具这样校验。<br>嗯，这点很重要。<br>不然别人问这样做的好处，千万不要「一脸茫然」。</p>
+<hr>
+<p>·感谢阅读·</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hangyangws.win/2019/06/27/stylelint/" data-id="cjxd1adnr0006ikn0huyunl6a"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stylelint/">stylelint</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2018/07/27/hooks-replace-redux/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">使用 React Hooks 代替 Redux</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'db1582ddec91680f2318',
+      clientSecret: '538f08a4f7b4eadeff4db57081c303baff6bc3d1',
+      repo: 'hangyangws.github.com',
+      owner: 'hangyangws',
+      admin: ['hangyangws'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 航洋</li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo-inverted.png" alt="航洋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">Tags</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

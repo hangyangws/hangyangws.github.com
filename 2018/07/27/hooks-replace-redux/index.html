@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="javascript,css,html,算法,前端">
+  
+  
+    <meta name="description" content="愿原力与你同在_friday.fj">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    使用 React Hooks 代替 Redux |
+    
+    航洋</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article
+  id="post-hooks-replace-redux"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 React Hooks 代替 Redux
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/07/27/hooks-replace-redux/" class="article-date">
+  <time datetime="2018-07-27T01:06:26.000Z" itemprop="datePublished">2018-07-26</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p><em>注：<br>此文章立场不表示 Hooks 可以完全代替 Redux。<br>因为 Redux 还有其他适用的场景和功能，只是在大部分场景可以用 Hooks 代替。<br>理性选择即合理。</em></p>
+</blockquote>
+<p>React Hooks 面世也有很大一段时间了。<br>我相信很多人对于 Hooks 的认知还大概处在：</p>
+<ol>
+<li>更 FP「Functional Programming」 编程方式</li>
+<li>更简洁易测的组件</li>
+<li>不用记住繁琐的生命周期函数</li>
+<li>…<a id="more"></a>
+
+</li>
+</ol>
+<p>上述这些特征点已经足以说服很大一部分人升级他们的 React 应用。<br>但是总是感觉少了点什么。</p>
+<p>我们知道 React 是一个以构建 UI 为主的的库：<br>A JavaScript library for building user interfaces.<br>但是 UI 如果脱离了数据，基本上也就是耍流氓了。<br>所以有 Redux、Mbox… 这样以数据管理为核心的库出现了。<br>现实业务场景中，UI 与数据相辅相成。</p>
+<p>在我最初学 React 的时候，原于成熟的方案、同事的推荐，是直接和 Redux 一起学习并且上手开发的。<br>当时我就在想：React 为什么不能自己实现类似 Redux 那样的数据处理功能呢？<br>对于想学习 React 的同学，无疑是增加了 Redux 的学习成本，<br>更加深了 React 的门槛与神秘值「这可不是一个优秀的开源库该有的特质」。</p>
+<p>往简单了说 Redux 就是实现了全局 state 、处理全局 state 的方式和统一的数据处理中心，也就是 store、dispatch 和 reducer。<br>虽然在 Hooks 之前我们可以通过 Context 模拟全局 state，但是我们还不能优雅的模拟 dispatch、reducer。</p>
+<p>如果 React 官方能出一个数据处理的解决方案，<br>不单单是减少一个 Redux npm 包的 bundle 体积，<br>还降低了学习与构建 React 应用的成本，<br>最重要的是更统一化的数据处理思想。</p>
+<p>年前，我在构建一个新的后台管理应用，考虑使用全新的 Hooks API。<br>当时 React 最新的版本还是 <code>16.7.0-alpha.2</code>。
+在对于数据处理上，我尝试了新的 <a href="https://reactjs.org/docs/context.html#api" target="_blank" rel="noopener">React Context API</a>，
+使用 Context API 提供的 <code>Provider</code> 和 <code>Consumer</code> 的方法，去实现代替 Redux 的数据处理方案「这也是网上大部分推荐的代替 Redux 的方案」。<br>但是代码越写越多，数据处理量越来越大，数据分类越来越多的时候，Context 显得力不从心，<br>虽然能解决需求，但是代码组织方式已经乱成了一锅粥「尝试过这个方案的人，应该知道我在说什么」。</p>
+<blockquote>
+<p><em>注：更不要使用 useState + context 的方式创建全局仓库来代替 Redux。</em></p>
+</blockquote>
+<p>十分万幸的是，不久后 React 更新版本到 <code>16.8.1</code>。
+推出了新的 Hooks：<a href="https://reactjs.org/docs/hooks-reference.html#usereducer" target="_blank" rel="noopener">useReducer</a>，惊喜之外意料之中。<br>这也就是这篇文章要讲的核心：使用 Hooks：useReducer 代替 Redux。</p>
+<h2 id="数据流对比"><a href="#数据流对比" class="headerlink" title="数据流对比"></a>数据流对比</h2><h3 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h3><p><img src="redux-%E6%95%B0%E6%8D%AE%E6%B5%81.png" alt="redux-数据流.png"></p>
+<h3 id="hooks"><a href="#hooks" class="headerlink" title="hooks"></a>hooks</h3><p><img src="react-hooks-%E6%95%B0%E6%8D%AE%E6%B5%81.jpg" alt="react-hooks-数据流.jpg"></p>
+<h3 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h3><p>redux 的数据流程图画得比较简单，理解大概意思就好，毕竟它不是我要说的重点，<br>和 hooks 的数据流程相比其实是大同小异。</p>
+<p>从 hooks 数据流能大致看出来，<br>我们设计好 store 后，通过对应的 hooks 函数生成每个 store 的 Provider 和 Context。<br>我们把所有的单个 Provider 糅合为一个整体的 Providers，作为所有 UI 的父组件。</p>
+<p>在任何一个子 UI 组件内部，通过 hooks 函数得到对应 store 的 state、dispatch。<br>UI 组件内，通过主动调用 dispatch 发送 action，然后经过 store 的数据处理中心 reducer，就能触发相应的数据改变。<br>这个数据流程和 redux 几乎一模一样。</p>
+<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><ol>
+<li>统一 store 数据管理</li>
+<li>支持以发送 action 来修改数据</li>
+<li>支持 action 处理中心：reducer</li>
+</ol>
+<h3 id="异同点"><a href="#异同点" class="headerlink" title="异同点"></a>异同点</h3><ol>
+<li>hooks UI 层获取 store 和 dispatch 不需要用 HOC 依赖注入，而是用 useContext</li>
+<li>redux 在 action 之后改变视图本质上还是 state 注入的方式修改的组件内部 state，而 hooks 则是一对一的数据触发</li>
+<li>hooks 的 reducer 来自于 useReducer</li>
+<li>hooks 还没有 <a href="https://redux.js.org/advanced/middleware" target="_blank" rel="noopener">middleware</a> 的解决方案</li>
+</ol>
+<h2 id="构建应用-DEMO"><a href="#构建应用-DEMO" class="headerlink" title="构建应用 DEMO"></a>构建应用 DEMO</h2><blockquote>
+<p>在构建应用之前，我们应该充分了解我们的应用，了解每一个 API 接口和返回的数据。这样不至于开发中期再来修改我们的仓库设计。<br>需要我们设计一个本地数「全局 store」，和相应的 action 用来修改这些数据。<br>其次就是目录设计了。<br>接下来我们以一个 TO DO Lists 为例开发一个纯 hooks 的 SPA 吧。</p>
+</blockquote>
+<h3 id="本地数据库设计"><a href="#本地数据库设计" class="headerlink" title="本地数据库设计"></a>本地数据库设计</h3><ul>
+<li>一个叫 list 的仓库</li>
+<li>三个 action: 增「ADD」、删「DELETE」、改「MODIFY」</li>
+</ul>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p><img src="%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.png" alt="文件结构.png"></p>
+<p>这个目录是比较简单的，毕竟是个 DEMO，和 hooks 无关的没列出来。</p>
+<h4 id="index-js-应用入口"><a href="#index-js-应用入口" class="headerlink" title="index.js 应用入口"></a>index.js 应用入口</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">'Pages/List/index'</span>;</span><br><span class="line"><span class="keyword">import</span> Layout <span class="keyword">from</span> <span class="string">'Components/Layout/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> history <span class="keyword">from</span> <span class="string">'./history'</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Router history=&#123;history&#125;&gt;</span><br><span class="line">    &lt;Layout&gt;</span><br><span class="line">      &lt;Switch&gt;</span><br><span class="line">        &lt;Redirect exact <span class="keyword">from</span>=<span class="string">"/"</span> to=<span class="string">"/List"</span> /&gt;</span><br><span class="line">        &lt;Route path=<span class="string">"/list"</span> component=&#123;List&#125; /&gt;</span><br><span class="line">        &lt;Route component=&#123;NotFound&#125; /&gt;</span><br><span class="line">      &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Layout&gt;</span><br><span class="line">  &lt;<span class="regexp">/Router&gt;,</span></span><br><span class="line"><span class="regexp">  document.getElementById('container')</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="components-Layout-index-应用主结构"><a href="#components-Layout-index-应用主结构" class="headerlink" title="components/Layout/index 应用主结构"></a>components/Layout/index 应用主结构</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment">// 引入组合 Provider</span></span><br><span class="line"><span class="keyword">import</span> Provider <span class="keyword">from</span> <span class="string">'Store/provider'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">'./components/Header/index'</span>;</span><br><span class="line"><span class="keyword">import</span> Footer <span class="keyword">from</span> <span class="string">'./components/Footer/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Layout = <span class="function">(<span class="params">props</span>) =&gt;</span> (</span><br><span class="line">  &lt;Provider&gt;</span><br><span class="line">    &lt;Header /&gt;</span><br><span class="line">    &#123;props.children&#125;</span><br><span class="line">    &lt;Footer /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Provider&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Layout;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的代码很关键，在 Layout 中我们引入「组合 Provider」，<br>提供「统一仓库数据提供」的能力，让子 UI 组件能获取 store 数据。</p>
+<h3 id="store-设计"><a href="#store-设计" class="headerlink" title="store 设计"></a>store 设计</h3><p><img src="store.png" alt="store.png"></p>
+<h4 id="provider-js"><a href="#provider-js" class="headerlink" title="provider.js"></a>provider.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Lists <span class="keyword">from</span> <span class="string">'./lists/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Provider = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Lists.Provider&gt;</span><br><span class="line">      &#123;props.children&#125;</span><br><span class="line">    &lt;<span class="regexp">/Lists.Provider&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Provider;</span></span><br></pre></td></tr></table></figure>
+
+<p>仔细观察这里的代码人应该会发现一个问题：<br>在 store 拓展的的情况下，这个代码很可能出现 <strong>代码嵌套地狱</strong>，类似这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment">// 多个 store 实例的情况</span></span><br><span class="line"><span class="keyword">import</span> One <span class="keyword">from</span> <span class="string">'./One/index'</span>;</span><br><span class="line"><span class="keyword">import</span> Two <span class="keyword">from</span> <span class="string">'./Two/index'</span>;</span><br><span class="line"><span class="keyword">import</span> Three <span class="keyword">from</span> <span class="string">'./Three/index'</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Provider = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;One.Provider&gt;</span><br><span class="line">      &lt;Two.Provider&gt;</span><br><span class="line">        &lt;Three.Provider&gt;</span><br><span class="line">          ...</span><br><span class="line">          &#123;props.children&#125;</span><br><span class="line">          ...</span><br><span class="line">        &lt;<span class="regexp">/Three.Provider&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Two.Provider&gt;</span><br><span class="line">    &lt;<span class="regexp">/One.Provider&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Provider;</span></span><br></pre></td></tr></table></figure>
+
+<p>所以需要 provider 组合器。</p>
+<h4 id="优化后-provider-js"><a href="#优化后-provider-js" class="headerlink" title="优化后 provider.js"></a>优化后 provider.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> providers <span class="keyword">from</span> <span class="string">'./providers'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据 Provider 组合器</span></span><br><span class="line"><span class="keyword">const</span> ProvidersComposer = <span class="function">(<span class="params">props</span>) =&gt;</span> (</span><br><span class="line">  props.providers.reduceRight(<span class="function">(<span class="params">children, Parent</span>) =&gt;</span> (</span><br><span class="line">    &lt;Parent&gt;&#123;children&#125;&lt;<span class="regexp">/Parent&gt;</span></span><br><span class="line"><span class="regexp">  ), props.children)</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const Provider = (props) =&gt; &#123;</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;ProvidersComposer providers=&#123;providers&#125;&gt;</span></span><br><span class="line"><span class="regexp">      &#123;props.children&#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>ProvidersComposer&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Provider;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码灵感来自：<a href="https://github.com/facebook/react/issues/14520" target="_blank" rel="noopener">How to combo multiple ContextProvider</a></p>
+<h4 id="providers-js"><a href="#providers-js" class="headerlink" title="providers.js"></a>providers.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Lists <span class="keyword">from</span> <span class="string">'./lists/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> providers = [Lists.Provider];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> providers;</span><br></pre></td></tr></table></figure>
+
+<p>即使有多个 Provider 我们也可以通过一维数组搞定啦！</p>
+<h3 id="数据项-amp-amp-数据处理器"><a href="#数据项-amp-amp-数据处理器" class="headerlink" title="数据项 &amp;&amp; 数据处理器"></a>数据项 &amp;&amp; 数据处理器</h3><p>在构建好基本的 Provider 后，我们需要提供基本的数据项和 reducer。</p>
+<h4 id="数据项"><a href="#数据项" class="headerlink" title="数据项"></a>数据项</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useReducer &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> reducer, &#123; initState &#125; <span class="keyword">from</span> <span class="string">'./reducer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Context = React.createContext();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Provider = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initState);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Context.Provider value=&#123;&#123; state, dispatch &#125;&#125;&gt;</span><br><span class="line">      &#123;props.children&#125;</span><br><span class="line">    &lt;<span class="regexp">/Context.Provider&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default &#123; Context, Provider &#125;;</span></span><br></pre></td></tr></table></figure>
+
+<p>首先使用 createContext 函数创建好上下 Context，并且对 Context 的 Provider 提供初始化 value，即 state、dispatch。<br>初始化的 state、dispatch 来自于 hooks：useReducer：<br>通过 useReducer 函数传入 reducer、initState，得到这样的数据结构： <code>[state, dispatch]</code>。</p>
+<p>不同的数据项的代码完全是通用，差异点在于每个数据项的 reducer、initState 不一样。</p>
+<h4 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> initState = []; <span class="comment">// 默认 todolist 是空数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据处理器</span></span><br><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; type, payload &#125; = action;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'ADD'</span>:</span><br><span class="line">      <span class="keyword">return</span> [...state, payload.data];</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'MODIFY'</span>:</span><br><span class="line">      <span class="keyword">return</span> state.map(</span><br><span class="line">        item =&gt; (item.id === payload.id ? payload.data : item);</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'DELETE'</span>:</span><br><span class="line">      <span class="keyword">return</span> state.map(</span><br><span class="line">        item =&gt; (item.id === payload.id ? <span class="literal">null</span> : item)</span><br><span class="line">      ).filter(<span class="function"><span class="params">n</span> =&gt;</span> n);</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducer;</span><br></pre></td></tr></table></figure>
+
+<p>能看出来，hooks reduer 和 redux reducer 基本没有区别。<br>我们根据 action 更新 state，还是那么熟悉的味道，那么熟悉的 switch 函数。</p>
+<h3 id="UI-组件"><a href="#UI-组件" class="headerlink" title="UI 组件"></a>UI 组件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> StoreLists <span class="keyword">from</span> <span class="string">'Store/lists/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Lists = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">state</span>: lists, <span class="attr">dispatch</span>: listsDispatch &#125; = React.useContext(StoreLists.Context);</span><br><span class="line">  <span class="keyword">const</span> &#123; newList, setNewList &#125; = React.useState(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">  handleDelete = <span class="function"><span class="params">item</span> =&gt;</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    listsDispatch(&#123;</span><br><span class="line">      type: <span class="string">'DELETE'</span>,</span><br><span class="line">      payload: item</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  handleSetNewList = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    setNewList(e.value);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  handleNewList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    listsDispatch(&#123;</span><br><span class="line">      type: <span class="string">'ADD'</span>,</span><br><span class="line">      payload: &#123;</span><br><span class="line">        id: <span class="built_in">Math</span>.random() * <span class="number">100</span>,</span><br><span class="line">        name: newList</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;TO DO list 列表&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">        &#123;lists.map(item =&gt; (</span></span><br><span class="line"><span class="regexp">          &lt;li key=&#123;item.id&#125;&gt;</span></span><br><span class="line"><span class="regexp">            &#123;item.name&#125;</span></span><br><span class="line"><span class="regexp">            &lt;button onClick=&#123;handleDelete(item)&#125;&gt;删除&lt;/</span>button&gt;</span><br><span class="line">          &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">        ))&#125;</span></span><br><span class="line"><span class="regexp">      &lt;/u</span>l&gt;</span><br><span class="line">      &lt;inpt type=<span class="string">"text"</span> value=&#123;newList&#125; onChange=&#123;handleSetNewList&#125; /&gt;</span><br><span class="line">      &lt;button onChange=&#123;handleNewList&#125;&gt;新建列表&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Lists;</span><br></pre></td></tr></table></figure>
+
+<p>在 UI 组件内，使用 hooks：useContext。<br>useContext 接受 store 导出的 Context 作为参数，得到 state、dispatch。<br>使用 state 渲染数据，使用 dispatch 修改数据。</p>
+<h3 id="真实代码示例"><a href="#真实代码示例" class="headerlink" title="真实代码示例"></a>真实代码示例</h3><p>通过上面的目录结构、store 设计、UI 组件三大步骤，我们可以使用 hooks 搭建出和 redux 一样的数据处理流程应用了。<br>如果想进一步了解，可以参考应用：<a href="https://github.com/hangyangws/tw-agents" target="_blank" rel="noopener">tw-agents</a>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hangyangws.win/2018/07/27/hooks-replace-redux/" data-id="cjxd1adoo000sikn0283rf93h"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/06/27/stylelint/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            stylelint 搭配 stylelint-order，更随心所欲的编码 CSS
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/05/27/baseTool/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">基础工具</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'db1582ddec91680f2318',
+      clientSecret: '538f08a4f7b4eadeff4db57081c303baff6bc3d1',
+      repo: 'hangyangws.github.com',
+      owner: 'hangyangws',
+      admin: ['hangyangws'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 航洋</li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo-inverted.png" alt="航洋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">Tags</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

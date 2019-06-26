@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="javascript,css,html,算法,前端">
+  
+  
+    <meta name="description" content="愿原力与你同在_friday.fj">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    SVG 扬帆起航 |
+    
+    航洋</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article
+  id="post-svg"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SVG 扬帆起航
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2017/04/27/svg/" class="article-date">
+  <time datetime="2017-04-27T01:20:30.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p>本文不能让你成为 SVG 大神，但是能让你知道、了解他「揭开神秘面纱」</p>
+</blockquote>
+<h2 id="基础认知"><a href="#基础认知" class="headerlink" title="基础认知"></a>基础认知</h2><p>SVG「Scalable Vector Graphics」表示「可缩放矢量图形『放大不模糊』」面向未来「W3C 标准」。<br>基本的 SVG 文档由 <code>&lt;svg&gt;</code> 根元素和 <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element" target="_blank" rel="noopener">基本形状元素</a> 构成<br>作为 XML 的一种方言，SVG 必须正确的绑定命名空间（在 xmlns 属性中绑定）。<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Namespaces_Crash_Course" target="_blank" rel="noopener">命名空间速成</a> 获取更多信息<br>SVG 文件全局有效的规则是 「后来居上」，越后面的元素越可见。</p>
+<a id="more"></a>
+
+<h3 id="能做什么"><a href="#能做什么" class="headerlink" title="能做什么"></a>能做什么</h3><p>动画、图形、渐变、旋转、滤镜、JavaScript 接口、各种超酷的动画…</p>
+<h3 id="和-HTML-使用的几种方式"><a href="#和-HTML-使用的几种方式" class="headerlink" title="和 HTML 使用的几种方式"></a>和 HTML 使用的几种方式</h3><p><strong><code>&lt;img src=&quot;xxx.svg&quot; height=&quot;10&quot; width=&quot;10&quot; /&gt;</code></strong><br>不能使用JS来控制</p>
+<p><strong><code>.svg { background-image: url(xxx.svg);}</code></strong><br>最好不使用 base64 格式化 SVG「阻塞其它资源」、不能使用 JS 控制</p>
+<p><strong><code>&lt;iframe src=&quot;xxx.svg&quot;&gt;Not support iframe&lt;/iframe&gt;</code></strong></p>
+<p><strong><code>&lt;embed type=&quot;image/svg+xml&quot; src=&quot;xxx.svg&quot; /&gt;</code></strong></p>
+<p><strong><code>&lt;object type=&quot;image/svg+xml&quot; data=&quot;xxx.svg&quot;&gt;Not support SVG&lt;/object&gt;</code></strong><br>能使用JS来控制「推荐方式」</p>
+<p><strong><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 10 10&quot;&gt;…&lt;/svg&gt;</code></strong><br>节省 HTTP 请求，能使用 JS 控制，不能被浏览器缓存</p>
+<h3 id="坐标系统"><a href="#坐标系统" class="headerlink" title="坐标系统"></a>坐标系统</h3><p>看图说话「原点在左上角」：<br><img src="svg-coordinate.png" alt="svg-coordinate"></p>
+<h3 id="viewBox"><a href="#viewBox" class="headerlink" title="viewBox"></a>viewBox</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">viewBox</span>=<span class="string">"0,0,40,30"</span> <span class="attr">style</span>=<span class="string">"border:1px solid #cd0000;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">x</span>=<span class="string">"10"</span> <span class="attr">y</span>=<span class="string">"5"</span> <span class="attr">width</span>=<span class="string">"20"</span> <span class="attr">height</span>=<span class="string">"15"</span> <span class="attr">fill</span>=<span class="string">"#cd0000"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://jsfiddle.net/hangyangws/ectdkt4u/1/" target="_blank" rel="noopener">viewBox demo</a></p>
+<p>动画理解：<br><img src="viewBox-1.png" alt="viewBox-1"><br><img src="viewBox-2.gif" alt="viewBox-2"></p>
+<p><a href="http://www.zhangxinxu.com/wordpress/2014/08/svg-viewport-viewbox-preserveaspectratio/" target="_blank" rel="noopener">深度阅读 - viewBox</a></p>
+<h2 id="CSS、JS-与-SVG"><a href="#CSS、JS-与-SVG" class="headerlink" title="CSS、JS 与 SVG"></a>CSS、JS 与 SVG</h2><h3 id="内敛样式"><a href="#内敛样式" class="headerlink" title="内敛样式"></a>内敛样式</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 68 65"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line">    &lt;![CDATA[</span><br><span class="line"><span class="css">    <span class="selector-class">.red</span> &#123; <span class="attribute">strock</span>: <span class="number">#f00</span>; &#125;</span></span><br><span class="line">    ]]&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">path</span> <span class="attr">class</span>=<span class="string">"red"</span> <span class="attr">d</span>=<span class="string">"M10 10v20"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="外链样式"><a href="#外链样式" class="headerlink" title="外链样式"></a>外链样式</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml-stylesheet type="text/css" href="xxx.css"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 68 65"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">path</span> <span class="attr">class</span>=<span class="string">"cls"</span> <span class="attr">d</span>=<span class="string">"M42 27v-20"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JS-操作-SVG"><a href="#JS-操作-SVG" class="headerlink" title="JS 操作 SVG"></a>JS 操作 SVG</h3><p>如果 SVG 代码作为 DOM 在 HTML 内部，可以向平常一样操作 DOM 操作 SVG<br>如果是使用 <code>&lt;object&gt;</code> 你可以使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLIFrameElement/contentDocument" target="_blank" rel="noopener">contentDocument</a> 来控制它 SVG</p>
+<p><strong>注意</strong></p>
+<ol>
+<li><code>&lt;img&gt;</code>、<code>background-image</code> 形式的 SVG 不支持「外链 CSS、JS」  </li>
+<li>内敛 CSS 和 JS 最好放在 <code>&lt;![CDATA[</code> 与 <code>]]&gt;</code> 之中</li>
+</ol>
+<h2 id="SVG-基础元素"><a href="#SVG-基础元素" class="headerlink" title="SVG 基础元素"></a>SVG 基础元素</h2><ul>
+<li><code>&lt;svg&gt;</code>：SVG 的根元素，可以相互嵌套</li>
+<li><code>&lt;g&gt;</code>：将 SVG 中的元素进行分组操作，分组后可以看成一个单独的形状，统一转换</li>
+<li><code>&lt;defs&gt;</code>：用于定义在 SVG 中可重用的元素，def 元素不会直接展示出来，可以通过 use 元素来引用</li>
+<li><code>&lt;use&gt;</code>：通过它来复用 def 元素，也包括 <code>&lt;g&gt;、&lt;symbol&gt;</code> 元素，使用 <code>&lt;use xlink:href=&quot;#id&quot;/&gt;</code> 调用</li>
+<li><code>&lt;text&gt;</code>：文本节点，可以实现 word 中的那种「艺术字」</li>
+<li><code>&lt;image&gt;</code>：在 SVG 中嵌套图片，可以对图片做对应的处理</li>
+<li>…</li>
+</ul>
+<h2 id="SVG-形状元素"><a href="#SVG-形状元素" class="headerlink" title="SVG 形状元素"></a>SVG 形状元素</h2><p>来张图压压惊：<br><img src="svg-element.jpg" alt="svg-element"></p>
+<p><a href="https://jsfiddle.net/hangyangws/gc8m0nen/1/" target="_blank" rel="noopener">点我查看 SVG 元素的基本 DEMO</a></p>
+<h3 id="lt-path-gt"><a href="#lt-path-gt" class="headerlink" title="&lt;path /&gt;"></a><code>&lt;path /&gt;</code></h3><p>别说话，先举个 🌰 ，一起感受一下 path：<a href="https://jsfiddle.net/hangyangws/ek7s4v1d/5/" target="_blank" rel="noopener">点我</a></p>
+<blockquote>
+<p>基于 path 的不同属性，可以画出各种各样的路径，所以 path 可算是 SVG 的「节点之王」<br>除了 path 之外的节点都「比较普通」，可以看成是对 path 的封装，比如「Rect、Circle…」</p>
+</blockquote>
+<p><strong>命令</strong><br>命令都用一个关键字母来表示，命令 <strong>都有两种</strong> 表示方式</p>
+<ol>
+<li>大写字母，表示采用「绝对定位」</li>
+<li>小写字母，表示采用「相对定位『相对于上一个点』」</li>
+</ol>
+<h4 id="path-的命令列表"><a href="#path-的命令列表" class="headerlink" title="path 的命令列表"></a>path 的命令列表</h4><blockquote>
+<p><code>document.getElementById(‘path’).getTotalLength()</code> 得到路径长度</p>
+</blockquote>
+<ul>
+<li><p>M：moveto 移动到</p>
+</li>
+<li><p>L：lineto 画线到；H：horizontal lineto 水平线到；V：vertical lineto 垂直线到</p>
+</li>
+</ul>
+<p>L 命令将会在当前位置和新位置之间画一条线段：L x y (or l dx dy)<br>还有两个简写命令：H，绘制平行线。V，绘制垂直线。这两个命令都只带一个参数，标明在 x 或 y 轴移动到的位置：<code>H x (or h dx)</code> 、<code>V y (or v dy)</code></p>
+<ul>
+<li>Z：closepath 关闭路径</li>
+</ul>
+<p>Z 命令会从当前点画一条直线到路径的起点，所以它还是经常被放到路径的最后。另外，Z 命令不用区分大小写：Z (or z)</p>
+<ul>
+<li>C：curveto 三次贝塞尔曲线</li>
+</ul>
+<p><code>C x1 y1, x2 y2, x y</code> 或 <code>c dx1 dy1, dx2 dy2, dx dy</code><br>(x1, y1)、(x2, y2) 分别是起点、终点控制点。最后一个坐标 (x, y)，表示曲线的终点<br>三次贝塞尔曲线 <strong>表现形式</strong> 是：曲线沿着 <strong>起点开始</strong> 到第一控制点的方向伸出，逐渐弯曲，然后沿着第二控制点到 <strong>终点的方向结束</strong></p>
+<ul>
+<li>S：smooth curveto 光滑三次贝塞尔曲线</li>
+</ul>
+<p>S 命令可以用来创建与之前那些曲线一样的贝塞尔曲线，通常和 C 命令一起使用<br>如果 S 命令跟在一个 C 命令或者另一个 S 命令的后面，它的第一个控制点，就会被假设成前一个控制点的对称点，不应该写出来，所以 S 省略了一个对称点</p>
+<ul>
+<li>Q：quadratic Belzier curve 二次贝塞尔曲线</li>
+</ul>
+<p><code>Q x1 y1, x y</code> 或 <code>q dx1 dy1, dx dy</code>  </p>
+<ul>
+<li>T：smooth quadratic Belzier curveto 光滑二次贝塞尔曲线</li>
+</ul>
+<p><code>T x y</code> 或 <code>t dx dy</code><br>T 命令类似于 S 命令，用于二次贝塞尔曲线。T 命令前面最好是一个 Q 命令，或者是另一个 T 命令<br>如果 T 单独使用，那么控制点就会被认为和终点是同一个点，所以画出来的将是一条直线</p>
+<ul>
+<li>A：elliptical Arc 椭圆弧</li>
+</ul>
+<p><code>A rx ry x-axis-rotation large-arc-flag sweep-flag x y</code> 或 <code>a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy</code></p>
+<p>rx ry：「椭圆」的 x，y半径<br>x-axis-rotation：X 轴旋转角度，顺时针为正数<br>large-arc-flag：1 表示用大弧度，0 表示小弧度<br>sweep-flag：弧度回话方向，1 顺时针，0 逆时针<br>x y：弧度终点</p>
+<h2 id="元素与样式"><a href="#元素与样式" class="headerlink" title="元素与样式"></a>元素与样式</h2><ul>
+<li>stroke</li>
+<li>fill</li>
+<li>transform</li>
+<li>linearGradient</li>
+<li>mask</li>
+<li>filter</li>
+<li>clipPath</li>
+</ul>
+<p>一些 Demo：<br><a href="https://jsfiddle.net/hangyangws/48uprrq5/" target="_blank" rel="noopener">svg 模糊 demo</a><br><a href="https://jsfiddle.net/hangyangws/0odr1kky/" target="_blank" rel="noopener">symbol demo</a><br><a href="https://jsfiddle.net/hangyangws/6L15hotf/" target="_blank" rel="noopener">symbol-use-demo</a><br><a href="https://jsfiddle.net/hangyangws/1puLynrs/" target="_blank" rel="noopener">text mask demo</a><br><a href="https://jsfiddle.net/hangyangws/60q9srrd/" target="_blank" rel="noopener">mask demo</a><br><a href="https://jsfiddle.net/hangyangws/Lh09hkpb/" target="_blank" rel="noopener">clip demo</a><br><a href="https://jsfiddle.net/hangyangws/dwvgwnc2/" target="_blank" rel="noopener">SVG 文字路径动画</a><br><a href="https://jsfiddle.net/hangyangws/yhxxdp6o/" target="_blank" rel="noopener">linearGradient Demo</a></p>
+<p><strong>使用 CSS 请注意</strong><br>把 background-color、border 改成 fill 和 stroke<br>上色和填充的部分一般是可以用 CSS 来设置的，比如 fill，stroke，stroke-dasharray，但不包括渐变和图案等。<br>另外，width、height，以及路径的命令等等，都不能用 css 设置<br><em>不是所有的属性都能用 CSS 来设置</em>：<a href="https://www.w3.org/TR/SVG/propidx.html" target="_blank" rel="noopener">SVG 规范</a> 将属性区分成 properties 和 attributes，前者是可以用 CSS 设置的，后者不能</p>
+<h2 id="SVG-动画"><a href="#SVG-动画" class="headerlink" title="SVG 动画"></a>SVG 动画</h2><blockquote>
+<p><a href="http://svgtrick.com/" target="_blank" rel="noopener">SVG 动画 集合</a><br>SVG 的动画元素是和 SMIL <a href="https://www.w3.org/TR/REC-smil/" target="_blank" rel="noopener">Synchronized Multimedia Integration Language</a>开发组合作开发的。<br>SMIL 开发组和 SVG 开发组合作开发了 SMIL 动画规范，在规范中制定了一个基本的 XML 动画特征集合。<br>SVG 吸收了 SMIL 动画规范当中的动画优点，并提供了一些SVG继承实现。</p>
+</blockquote>
+<p>大概三种实现方式：</p>
+<ul>
+<li>JS 动画「DOM 操作『忽视它』」</li>
+<li>CSS3 动画「animation、transition『不是 svg 的重点』」</li>
+<li>SVG 本身的动画「基于 SMIL」「主要借助 SVG <code>animate</code> 相关标签」</li>
+</ul>
+<p><img src="svg-animate-attr.jpg" alt="svg-animate-attr"></p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set 表示此元素没有动画效果 😨😨😨。<br>好吧：这样的，虽然 set 虽然不能触发连续的动画，但是，其还是可以实现基本的延迟功能。<br>就是指：可以在特定时间之后修改某个属性值「也可以是 CSS 属性值」。</p>
+<p><a href="https://jsfiddle.net/hangyangws/d6m1oyng/1/" target="_blank" rel="noopener">一个 Demo</a></p>
+<h3 id="animate"><a href="#animate" class="headerlink" title="animate"></a>animate</h3><p>SVG animation 最强大的地方在于：「只要在页面放几个 animate 元素，没有任何 CSS, 没有任何JS」</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">animate</span></span></span><br><span class="line"><span class="tag">  <span class="attr">id</span>=<span class="string">"id"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">begin</span>=<span class="string">"id.end + 1s"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">attributeName</span>=<span class="string">"r"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">attributeType</span>=<span class="string">"XML"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">from</span>=<span class="string">"50"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">to</span>=<span class="string">"80"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">by</span>=<span class="string">"30"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">values</span>=<span class="string">"50;80"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">begin</span>=<span class="string">"0s"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">dur</span>=<span class="string">".5s"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">repeatCount</span>=<span class="string">"indefinite"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">fill</span>=<span class="string">"freeze"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">animate</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://jsfiddle.net/hangyangws/vk3j2pk1/1/" target="_blank" rel="noopener">一个 Demo</a></p>
+<h3 id="animateColor"><a href="#animateColor" class="headerlink" title="animateColor"></a>animateColor</h3><p>一看就知道是颜色动画。不过，animate 可以实现其功能与效果，因此，此属性已经被废弃。<br>可谓因为兄弟相争而年少陨落的天王。逝者已矣，过去的就让它过去吧 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### animateTransform</span><br><span class="line"></span><br><span class="line">```xml</span><br><span class="line">&lt;animateTransform</span><br><span class="line">  attributeName=&quot;transform&quot;</span><br><span class="line">  attributeType=&quot;XML&quot;</span><br><span class="line">  type=&quot;rotate&quot;</span><br><span class="line">  from=&quot;0 125 135&quot;</span><br><span class="line">  to=&quot;360 125 135&quot;</span><br><span class="line">  begin=&quot;0s&quot;</span><br><span class="line">  dur=&quot;10s&quot;</span><br><span class="line">  repeatCount=&quot;indefinite&quot;&gt;</span><br><span class="line">&lt;/animateTransform&gt;</span><br><span class="line">```</span><br><span class="line">[一个 Demo](https://jsfiddle.net/hangyangws/zqLorfo9/1/)</span><br><span class="line"></span><br><span class="line">### animateMotion</span><br><span class="line"></span><br><span class="line">animateMotion 元素可以让 SVG 各种图形沿着特定的 path 路径运动</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">animateMotion</span></span></span><br><span class="line"><span class="tag">  <span class="attr">dur</span>=<span class="string">"6s"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">repeatCount</span>=<span class="string">"indefinite"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">path</span>=<span class="string">"M100 100, A120 120, -45 0 1, 300 300 A120 120, -45 0 1, 100 100"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">animateMotion</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://jsfiddle.net/hangyangws/yxncvsph/1/" target="_blank" rel="noopener">一个 Demo</a></p>
+<h3 id="例子分析"><a href="#例子分析" class="headerlink" title="例子分析"></a>例子分析</h3><p>组合：<br><a href="https://jsfiddle.net/hangyangws/z0zLcm9c/1/" target="_blank" rel="noopener">一个 Demo</a></p>
+<p>end 事件：<br><a href="https://jsfiddle.net/hangyangws/xxm1wkx4/2/" target="_blank" rel="noopener">一个 Demo</a></p>
+<p>click 事件：<br><a href="https://jsfiddle.net/hangyangws/Lr8gs5gn/1/" target="_blank" rel="noopener">一个 Demo</a></p>
+<h2 id="进阶阅读推荐"><a href="#进阶阅读推荐" class="headerlink" title="进阶阅读推荐"></a>进阶阅读推荐</h2><ul>
+<li><a href="http://www.cnblogs.com/hnfxs/p/3148483.html" target="_blank" rel="noopener">贝塞尔曲线原理「简单阐述」</a></li>
+</ul>
+<h2 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h2><ul>
+<li>svgo</li>
+</ul>
+<p>项目地址：<a href="https://github.com/svg/svgo" target="_blank" rel="noopener">点我查看</a><br>比较厉害的压缩优化 SVG 的工具，可以将 SVG 中的无用信息删掉，同时支持代码进行压缩</p>
+<ul>
+<li>SVGOMG</li>
+</ul>
+<p>展示地址：<a href="https://jakearchibald.github.io/svgomg/" target="_blank" rel="noopener">SVGOMG - SVGO’s Missing GUI</a><br>SVGOMG 是 svgo 的可视化界面工具，操作起来很方便，还提供了一些其他有用的功能</p>
+<ul>
+<li>Snap.svg</li>
+</ul>
+<p>项目地址：<a href="http://snapsvg.io/" target="_blank" rel="noopener">Snap.svg - Home</a><br>Snap.svg 是一个可以使你操纵 SVG 资源和 jQuery 操作 DOM 一样简单的类库，<br>可以写出更加复杂的 SVG 效果，同时文档超级齐全，推荐给想深入了解的同学。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hangyangws.win/2017/04/27/svg/" data-id="cjxd1adoq000wikn0ghhoa07j"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVG/">SVG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图形/">图形</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2017/05/26/preserve-3d/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            「移动设备陀螺仪」与「preserve-3d」碰撞的火花
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2017/01/27/promise/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">简谈 Promise</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'db1582ddec91680f2318',
+      clientSecret: '538f08a4f7b4eadeff4db57081c303baff6bc3d1',
+      repo: 'hangyangws.github.com',
+      owner: 'hangyangws',
+      admin: ['hangyangws'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 航洋</li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo-inverted.png" alt="航洋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">Tags</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

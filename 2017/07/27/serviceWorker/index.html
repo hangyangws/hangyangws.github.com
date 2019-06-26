@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="javascript,css,html,算法,前端">
+  
+  
+    <meta name="description" content="愿原力与你同在_friday.fj">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    service worker |
+    
+    航洋</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article
+  id="post-serviceWorker"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      service worker
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2017/07/27/serviceWorker/" class="article-date">
+  <time datetime="2017-07-27T01:12:49.000Z" itemprop="datePublished">2017-07-26</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="简介-amp-背景"><a href="#简介-amp-背景" class="headerlink" title="简介 &amp; 背景"></a>简介 &amp; 背景</h3><p>众所周知「浏览器的的每个每个网页在单进程中执行，而网页中的 JS 的普通运算在单线程中执行」<br>那么 JS 高负荷运算的时候，单线程就吃不消  </p>
+<p>那么 <strong>救世主</strong> 来了</p>
+<p>Web Worker 独立与当前网页的 JS 单线程，自己独占一个线程<br>Web Worker 可以理解为，<code>网络的苦力工</code>，可以处理繁重的「任务、运算」<br>Web Worker 线程和 JS 线程，二者之间可使用 <code>postMessage</code> 双向通信</p>
+<a id="more"></a>
+
+<h3 id="一个乘法-DEMO"><a href="#一个乘法-DEMO" class="headerlink" title="一个乘法 DEMO"></a>一个乘法 DEMO</h3><p><a href="http://hangyangws.win/demos/src/web_worker/">点我</a></p>
+<h3 id="关闭-worker-实例（杀掉线程）"><a href="#关闭-worker-实例（杀掉线程）" class="headerlink" title="关闭 worker 实例（杀掉线程）"></a>关闭 worker 实例（杀掉线程）</h3><blockquote>
+<p>官方推荐是，使用 <code>self.close</code> 进行内部的自动关闭，这样能防止, 意外关闭正在运行的 <code>worker</code></p>
+</blockquote>
+<ol>
+<li>workerObj.terminate(): 在外部终结该 worker</li>
+<li>self.close(): 在 worker 内部自动终结</li>
+</ol>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>全局索引就是 <code>self</code> 和 <code>this</code> ，来获取 worker 自带的方法</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>worker 引用的就是 js 文件<br>由于 worker 是独立的线程，他和 main js threading 有很大区别的</p>
+<p>worker <strong>访问权限</strong> 有</p>
+<ol>
+<li>window.navigator 相关属性和方法</li>
+<li>只读的 window.location 内容.</li>
+<li>window.XMLHttpRequest （卧槽… 可以访问这个那就不得了， worker 就可以利用 ajax 来和后台进行通信了）</li>
+<li>setInterval 相关时间函数</li>
+</ol>
+<p><strong>同域限制</strong></p>
+<p>worker 在访问时, 只能是在同一 host 下才行. 即, 你的 worker 只能处于指定目录下的 path 中<br>所以：本地调试 file://xxx 的话, 也不能使用 worker</p>
+<p>在当前的 worker 加载其他库文件</p>
+<p>可以使用 <strong>importScripts</strong> 来导入（自动缓存文件）<br><code>importScripts(&#39;example1.js&#39;,&#39;example2.js&#39;)</code></p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>根据 worker 独立线程特性，可以把大规模数据并发， I/O 操作都可以交给他<br>总的来说有这些场景</p>
+<ul>
+<li>懒加载数据</li>
+<li>文本分析</li>
+<li>流媒体数据处理</li>
+<li>web database 的更新</li>
+</ul>
+<hr>
+<h1 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h1><p><a href="https://juejin.im/post/591028fc2f301e006c291c4b" target="_blank" rel="noopener">参考链接1</a><br><a href="https://segmentfault.com/a/1190000006678016" target="_blank" rel="noopener">参考链接2</a>  </p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>使用 Service Worker 可以使你的应用先访问本地缓存<br>所以在离线状态时，在没有通过网络接收到更多的数据前，仍可以提供基本的功能体验<br>这称之为 Offline First</p>
+<p>它使得开发者可以支持非常好的离线体验，给予开发者完全控制离线数据的能力<br>service worker 是一段运行在浏览器后台进程里的脚本，它独立于当前页面<br>原生 APP 有 Web 通常所不具备的富离线体验、定时的静默更新、消息通知推送……<br>而 Service workers 标准让在 Web 拥有这些功能成为可能</p>
+<p>Service workers 由 cache 和 <a href="https://www.villainhr.com/page/2016/08/22/Web%20Worker" target="_blank" rel="noopener">Worker</a>二部分组成<br>不会阻碍当前 js 进程的执行，确保性能第一<br>service worker 函数像一个代理服务器一样，允许你修改请求和响应，用他们的缓存替代它们等等</p>
+<p>SW 是基于 HTTPS 的，如果你的网站不是 HTTPS，那么基本上你也别想了 SW<br>这估计造成了一个困难，即，我调试 SW 的时候咋办<br>解决办法也是有的，使用 charles 或者 fildder 完成域名映射即可</p>
+<p>serviceWorker 是挂载到 navigator 下的对象</p>
+<h3 id="注册失败原因"><a href="#注册失败原因" class="headerlink" title="注册失败原因"></a>注册失败原因</h3><ol>
+<li>你没有在 HTTPS 下运行你的程序</li>
+<li>service worker 文件的地址没有写对（需要相对于 origin , 而不是 app 的根目录）</li>
+<li>service worker 注册的 scope 大于他自己的作用域</li>
+</ol>
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>service worker，它工作在 worker context，所以它不能直接操作 DOM ，但是可以通过 postMessage 与页面之间通信，如果需要的话，让页面自己去操作DOM</li>
+<li>Service worker 是一个可编程的<strong>网络代理</strong>，允许开发者控制页面上处理的网络请求</li>
+<li>在不被使用的时候，会自己终止，而当它再次被用到的时候，会被重新激活</li>
+</ul>
+<blockquote>
+<p>所以你不能依赖于 service worker 的 onfetch 和 onmessage 的处理函数中的全局状态<br>如果你想要保存一些持久化的信息，你可以在 service worker 里使用 IndexedDB API</p>
+</blockquote>
+<ul>
+<li><p>service work 会收到他域下的所有fetch事件，所以注册时，要注意路径</p>
+</li>
+<li><p>打开浏览器支持（设置后都需要重启浏览器）</p>
+</li>
+</ul>
+<blockquote>
+<p>Firefox Nightly: <code>about:config</code> 设置 dom.serviceWorkers.enabled 的值为 true<br>Chrome Canary: <code>chrome://flags</code> 开启 experimental-web-platform-features (有些特性在Chrome中没有默认开放支持）<br>Opera: <code>opera://flags</code> 开启 ServiceWorker 支持</p>
+</blockquote>
+<ul>
+<li>需要通过HTTPS来访问你的页面代码（安全）[可以通过git pages 测试]</li>
+<li>localStorage 跟  service worker 的 cache 工作原理很类似，但是它是同步的，所以不允许在  service workers 内使用</li>
+<li>IndexedDB 可以在  service worker 内做数据存储</li>
+<li>还不能做到完全的离线，比如需要更新数据库的请求</li>
+</ul>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><img src="lifycycle.png" alt="lifycycle"></p>
+<p>要让一个 service worker 在你的网站上生效，你需要先在你的网页中<strong>注册</strong>它  
+浏览器会在后台默默启动一个 service worker 的<strong>安装</strong>过程<br>安装过程中，浏览器会加载并缓存一些静态资源，如果<strong>所有</strong>的文件被缓存成功，则安装成功，如果有<strong>任何</strong>文件加载或缓存失败，则安装失败<br>失败后会<strong>重新尝试</strong></p>
+<h3 id="请求拦截之-fetch-事件"><a href="#请求拦截之-fetch-事件" class="headerlink" title="请求拦截之 fetch 事件"></a>请求拦截之 fetch 事件</h3><p>sw 内部的 fetch事件可以拦截 sw 作用域下面的所有请求<br>然后我们可以随便发挥，然后使用 event.respondWith 返回请求响应</p>
+<p><img src="fetch.png" alt="fetch"></p>
+<p>SW 支持的事件</p>
+<ol>
+<li>install</li>
+<li>activate</li>
+<li>message</li>
+<li>fetch</li>
+<li>sync</li>
+<li>push</li>
+</ol>
+<p>后台进程: SW 就是一个 worker 独立于当前网页进程。<br>网络代理: SW 可以用来代理请求，缓存文件<br>灵活触发: 需要的时候吊起，不需要的时候睡眠（这个是个坑）<br>异步控制: SW 内部使用 promise 来进行控制。</p>
+<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><p>浏览器的资源、网页的内存有限，再开个 SW（这个很大的），易闪退<br>为减少性能损耗，一般直接在 onload 里注册 SW</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 注册（告诉浏览器你的 service worker 脚本在哪里）</span></span><br><span class="line">    <span class="comment">// 如果某个 service worker 已经被注册过，再次注册浏览器会自动忽略</span></span><br><span class="line">    navigator.serviceWorker.register(<span class="string">'/sw.js'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">registration</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 注册成功</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'SW作用域：'</span>, registration.scope);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 注册失败</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'SW注册失败：'</span>, err);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="一个-DEMO"><a href="#一个-DEMO" class="headerlink" title="一个 DEMO"></a>一个 DEMO</h3><p><a href="https://hangyangws.github.com/demos/src/service_worker/" target="_blank" rel="noopener">点我</a></p>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Cache" target="_blank" rel="noopener">link</a></p>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><p>打开 <code>chrome://inspect/#service-workers</code> 查看当前浏览器中正在注册的 SW<br><code>chrome://serviceworker-internals</code> 用来查看当前浏览器中所有注册好的 SW</p>
+<p>本地 https 简单构建 <code>python</code> 脚本</p>
+<p>python 2<br><code>python -m SimpleHTTPServer 8001</code><br>python 3<br><code>python3 -m http.server 8001</code></p>
+<h3 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h3><p><a href="https://jakearchibald.github.io/isserviceworkerready/" target="_blank" rel="noopener">点我</a></p>
+<h3 id="使用分析"><a href="#使用分析" class="headerlink" title="使用分析"></a>使用分析</h3><p>什么时候开启 SW ? window.onload 可靠吗？<br>例如，<a href="https://events.google.com/io2016/" target="_blank" rel="noopener">Google I/O 2016 网络应用</a>在过渡到主屏幕前先显示一个简短的动画。然后发现，在显示动画期间启动 SW 会导致低端移动设备出现卡顿</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hangyangws.win/2017/07/27/serviceWorker/" data-id="cjxd1adnt000aikn030jb0mxv"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/worker/">worker</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/02/21/for-in-of/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            for-in 与 for-of
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2017/06/02/css-width-about/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">我遇见的哪些 CSS 中有趣的尺寸、宽高</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'db1582ddec91680f2318',
+      clientSecret: '538f08a4f7b4eadeff4db57081c303baff6bc3d1',
+      repo: 'hangyangws.github.com',
+      owner: 'hangyangws',
+      admin: ['hangyangws'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 航洋</li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo-inverted.png" alt="航洋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">Tags</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

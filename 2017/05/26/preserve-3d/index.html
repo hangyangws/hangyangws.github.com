@@ -69,7 +69,7 @@
 <a id="more"></a>
 
 <p><img src="deviceorientation.gif" alt="deviceorientation"></p>
-<h3 id="如何搭建一个简单的立方体"><a href="#如何搭建一个简单的立方体" class="headerlink" title="如何搭建一个简单的立方体"></a>如何搭建一个简单的立方体</h3><p>只需要寥寥几行 HTML、CSS 代码就能产出一个「立方体」</p>
+<h2 id="如何搭建一个简单的立方体"><a href="#如何搭建一个简单的立方体" class="headerlink" title="如何搭建一个简单的立方体"></a>如何搭建一个简单的立方体</h2><p>只需要寥寥几行 HTML、CSS 代码就能产出一个「立方体」</p>
 <ul>
 <li>核心 HTML 如下</li>
 </ul>
@@ -108,7 +108,7 @@
 <p>同理，我们可以做出右边的效果，唯一区别就是，右边移动方向与左边相反。<br>道理类似，异曲同工，上边和下边，想必聪明的大家都掌握了正确写法姿势。</p>
 <p>成品大概是这个样子：</p>
 <p><img src="preserve-3d-5.jpg" alt="preserve-3d-5"></p>
-<h3 id="用陀螺仪使立方体动起来"><a href="#用陀螺仪使立方体动起来" class="headerlink" title="用陀螺仪使立方体动起来"></a>用陀螺仪使立方体动起来</h3><p>细心的开发者应该发现了，在最开始，我给父元素 <code>.cube</code> 设置了：<br><code>transform: rotateX(10deg) rotateY(10deg) rotateZ(10deg)</code><br>让父元素在三维空间上旋转 10 度。<br>如果我们动态连续修改这三个值，绝对可以达到 3D 旋转动画的效果。</p>
+<h2 id="用陀螺仪使立方体动起来"><a href="#用陀螺仪使立方体动起来" class="headerlink" title="用陀螺仪使立方体动起来"></a>用陀螺仪使立方体动起来</h2><p>细心的开发者应该发现了，在最开始，我给父元素 <code>.cube</code> 设置了：<br><code>transform: rotateX(10deg) rotateY(10deg) rotateZ(10deg)</code><br>让父元素在三维空间上旋转 10 度。<br>如果我们动态连续修改这三个值，绝对可以达到 3D 旋转动画的效果。</p>
 <p>这个时候，JS 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Detecting_device_orientation#%E5%A4%84%E7%90%86%E6%96%B9%E5%90%91%EF%BC%88orientation%EF%BC%89%E4%BA%8B%E4%BB%B6" target="_blank" rel="noopener">deviceorientation「检测设备方向」</a> 事件闪现突然闪现在我的脑海。<br>因为这个事件的回调参数里面恰好有三个参数「beta、gamma、alpha」，分别代表「X、Y、Z」的旋转方向。</p>
 <p><strong>beta</strong> 表示设备在 x 轴上的旋转角度，范围为 <code>[-180, 180]</code> 度。它描述的是设备由前向后旋转的情况。<br><strong>gamma</strong> 表示设备在 y 轴上的旋转角度，范围为 <code>[-90, 90]</code> 度。它描述的是设备由左向右旋转的情况。<br><strong>alpha</strong> 表示设备沿 z 轴上的旋转角度，范围为 <code>[0, 360]</code> 度。  </p>
 <p>大概是这个样子：</p>
@@ -131,7 +131,7 @@
 <p>完整的代码大概是这样：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cube = <span class="built_in">document</span>.querySelector(<span class="string">'.cube'</span>)</span><br><span class="line"><span class="keyword">const</span> setCubePosition = <span class="function">(<span class="params">&#123;x = <span class="number">0</span>, y = <span class="number">0</span>, z = <span class="number">0</span>&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  cube.style = <span class="string">`transform: rotateX(<span class="subst">$&#123;x&#125;</span>deg) rotateY(<span class="subst">$&#123;y&#125;</span>deg) rotateZ(<span class="subst">$&#123;x&#125;</span>deg);-webkit-transform: rotateX(<span class="subst">$&#123;x&#125;</span>deg) rotateY(<span class="subst">$&#123;y&#125;</span>deg) rotateZ(<span class="subst">$&#123;x&#125;</span>deg);`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> handleOrientation = <span class="function">(<span class="params">&#123;beta: x, gamma: y, alpha: z&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  setCubePosition(&#123;</span><br><span class="line">    x: x * <span class="number">2</span>,</span><br><span class="line">    y: y * <span class="number">4</span>,</span><br><span class="line">    z: (z - <span class="number">180</span>) * <span class="number">2</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">global.addEventListener(<span class="string">'deviceorientation'</span>, handleOrientation)</span><br></pre></td></tr></table></figure>
 
-<h3 id="庆祝时刻"><a href="#庆祝时刻" class="headerlink" title="庆祝时刻"></a>庆祝时刻</h3><p>现在我们已经完成了，一个利用「移动设备陀螺仪」与「preserve-3d」实现的 3D 交互效果。<br>让我们为自己鼓掌<br> 👏👏👏</p>
+<h2 id="庆祝时刻"><a href="#庆祝时刻" class="headerlink" title="庆祝时刻"></a>庆祝时刻</h2><p>现在我们已经完成了，一个利用「移动设备陀螺仪」与「preserve-3d」实现的 3D 交互效果。<br>让我们为自己鼓掌<br> 👏👏👏</p>
 <p><a href="https://github.com/hangyangws/demos/blob/master/src/device_orientation/cube.html" target="_blank" rel="noopener">点我查看完整代码</a></p>
 <hr>
 <p>感谢阅读</p>
@@ -139,10 +139,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hangyangws.win/2017/05/26/preserve-3d/" data-id="cjxczp9b80001grn0eqg09m83"
+      <a data-url="http://hangyangws.win/2017/05/26/preserve-3d/" data-id="cjxd1adnq0005ikn0hfo3w3p3"
          class="article-share-link">Share</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D/">3D</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
 
     </footer>
 
@@ -150,6 +150,25 @@
 
   
     
+  <nav class="article-nav">
+    
+      <a href="/2017/06/02/css-width-about/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            我遇见的哪些 CSS 中有趣的尺寸、宽高
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2017/04/27/svg/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">SVG 扬帆起航</div>
+      </a>
+    
+  </nav>
+
 
   
 

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="javascript,css,html,算法,前端">
+  
+  
+    <meta name="description" content="愿原力与你同在_friday.fj">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    sublime 配置 &amp; 教程 |
+    
+    航洋</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article
+  id="post-sublime"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sublime 配置 &amp; 教程
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2016/04/27/sublime/" class="article-date">
+  <time datetime="2016-04-27T01:18:18.000Z" itemprop="datePublished">2016-04-26</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p>主要是真对前端开发友好的配置</p>
+</blockquote>
+<h2 id="下载-sublime"><a href="#下载-sublime" class="headerlink" title="下载 sublime"></a>下载 sublime</h2><p><a href="https://www.sublimetext.com/3" target="_blank" rel="noopener">官网下载</a></p>
+<h2 id="安装-Package-Control"><a href="#安装-Package-Control" class="headerlink" title="安装 Package Control"></a>安装 <code>Package Control</code></h2><p>快捷键「ctrl + `」，然后输入对应的 Python code，详情见 <a href="https://packagecontrol.io/installation" target="_blank" rel="noopener">官网链接</a>。</p>
+<a id="more"></a>
+
+<h2 id="安装需要的-Package"><a href="#安装需要的-Package" class="headerlink" title="安装需要的 Package"></a>安装需要的 <code>Package</code></h2><ol>
+<li>快捷键 <code>command + shift + P</code></li>
+<li>输入 <code>Install Package</code></li>
+<li>回车，等待一会儿</li>
+<li>输入想要安装的 <code>Package</code></li>
+</ol>
+<p>安利一些前端合适的 <code>Package</code>「具体 Package 的作用可以自己 google」：</p>
+<ul>
+<li>Babel</li>
+<li>CSScomb</li>
+<li>DocBlockr</li>
+<li>Emmet</li>
+<li>HTML-CSS-JS Prettify</li>
+<li>LESS</li>
+<li>Meterial Theme</li>
+<li>Sass</li>
+<li>SideBarEnhancements</li>
+<li>TrailingSpaces</li>
+</ul>
+<h2 id="卸载-Package"><a href="#卸载-Package" class="headerlink" title="卸载 Package"></a>卸载 <code>Package</code></h2><ol>
+<li>快捷键 <code>command + shift + P</code></li>
+<li>输入 <code>Remove Package</code></li>
+<li>输入想要卸载的 <code>Package</code>，回车</li>
+</ol>
+<h2 id="配置-sublime-参数"><a href="#配置-sublime-参数" class="headerlink" title="配置 sublime 参数"></a>配置 sublime 参数</h2><p>快捷键 <code>command + shift + P</code>，输入 <code>Settings</code>，回车；<br>或者直接输入快捷键 「command + `」。<br>然后在弹出的窗口右侧输入配置。</p>
+<p>以下为建议配置「对应的含义请自行 google」：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"always_show_minimap_viewport"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"caret_style"</span>: <span class="string">"phase"</span>,</span><br><span class="line">  <span class="attr">"css"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"indent_char"</span>: <span class="string">" "</span>,</span><br><span class="line">    <span class="attr">"indent_size"</span>: <span class="number">2</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"enable_tab_scrolling"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"folder_exclude_patterns"</span>:</span><br><span class="line">  [</span><br><span class="line">    <span class="string">".svn"</span>,</span><br><span class="line">    <span class="string">".git"</span>,</span><br><span class="line">    <span class="string">"node_modules"</span>,</span><br><span class="line">    <span class="string">".hg"</span>,</span><br><span class="line">    <span class="string">"CVS"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"font_options"</span>:</span><br><span class="line">  [</span><br><span class="line">    <span class="string">"gray_antialias"</span>,</span><br><span class="line">    <span class="string">"subpixel_antialias"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"font_size"</span>: <span class="number">14</span>,</span><br><span class="line">  <span class="attr">"highlight_line"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"highlight_modified_tabs"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"html"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"indent_char"</span>: <span class="string">" "</span>,</span><br><span class="line">    <span class="attr">"indent_size"</span>: <span class="number">2</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"ignored_packages"</span>:</span><br><span class="line">  [</span><br><span class="line">    <span class="string">"Vintage"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"indent_guide_options"</span>:</span><br><span class="line">  [</span><br><span class="line">    <span class="string">"draw_normal"</span>,</span><br><span class="line">    <span class="string">"draw_active"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"js"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"indent_char"</span>: <span class="string">" "</span>,</span><br><span class="line">    <span class="attr">"indent_size"</span>: <span class="number">2</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"line_padding_bottom"</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="attr">"line_padding_top"</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="attr">"overlay_scroll_bars"</span>: <span class="string">"enabled"</span>,</span><br><span class="line">  <span class="attr">"rulers"</span>:</span><br><span class="line">  [</span><br><span class="line">    <span class="number">80</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"scroll_past_end"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"show_full_path"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"tab_completion"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"tab_size"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"translate_tabs_to_spaces"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"vintage_start_in_command_mode"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"word_wrap"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-sublime-主题"><a href="#配置-sublime-主题" class="headerlink" title="配置 sublime 主题"></a>配置 sublime 主题</h2><p>个人审美不同，我喜欢：<a href="http://equinsuocha.io/material-theme" target="_blank" rel="noopener">Material Theme</a><br>Material Theme 的 <a href="https://github.com/equinusocio/material-theme#easy-installation" target="_blank" rel="noopener">github 首页</a> 有安装教程<br>安装成功后，在 sublime 参数里面添加如下配置  </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"theme"</span>: <span class="string">"Material-Theme.sublime-theme"</span>,</span><br><span class="line">  <span class="attr">"color_scheme"</span>: <span class="string">"Packages/Material Theme/schemes/Material-Theme.tmTheme"</span>,</span><br><span class="line">  <span class="attr">"material_theme_compact_sidebar"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"material_theme_contrast_mode"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"material_theme_small_tab"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"material_theme_tabs_autowidth"</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>「除了第一行 <code>&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;</code> 是必须的配置以外，<br>其他的都是自定义配置，可以根据 <a href="https://github.com/equinusocio/material-theme#theme-options" target="_blank" rel="noopener">官方配置表</a> 选择」</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hangyangws.win/2016/04/27/sublime/" data-id="cjxd1adns0007ikn02ff6qj7f"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2017/01/27/promise/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            简谈 Promise
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'db1582ddec91680f2318',
+      clientSecret: '538f08a4f7b4eadeff4db57081c303baff6bc3d1',
+      repo: 'hangyangws.github.com',
+      owner: 'hangyangws',
+      admin: ['hangyangws'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 航洋</li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo-inverted.png" alt="航洋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">Tags</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
