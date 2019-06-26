@@ -1,11 +1,16 @@
 <section class="outer">
-  <%
-    site.posts.each((post, index) => {
-  %>
-    <div class="archives">
-      <%- partial('_partial/archive-post', {post: post, even: index % 2 == 0}) %>
-    </div>
-  <%
-    });
-  %>
+  <article class="articles">
+    <h1 class="page-type-title"><%- page.title %></h1>
+    <ul class="tag-list">
+      <%
+        site.tags.forEach(tag => {
+      %>
+          <li class="tag-list-item">
+            <a class="tag-list-link" href="/tags/<%- tag.name %>/"><%- tag.name %></a>
+          </li>
+      <%
+        });
+      %>
+    </ul>
+  </article>
 </section>
