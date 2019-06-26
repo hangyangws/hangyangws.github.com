@@ -2,8 +2,9 @@
 title: 「移动设备陀螺仪」与「preserve-3d」碰撞的火花
 date: 2019-06-25 18:29:58
 updated: 2019-06-25 18:29:58
-categories: [css]
-tags: [css]
+tags:
+- css
+- 动画
 ---
 
 > 涉及知识「CSS：transform、JS：deviceorientation」

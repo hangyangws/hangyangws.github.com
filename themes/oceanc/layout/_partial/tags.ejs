@@ -1,0 +1,11 @@
+<section class="outer">
+  <%
+    site.posts.each((post, index) => {
+  %>
+    <div class="archives">
+      <%- partial('_partial/archive-post', {post: post, even: index % 2 == 0}) %>
+    </div>
+  <%
+    });
+  %>
+</section>

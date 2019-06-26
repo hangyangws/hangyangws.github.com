@@ -1,0 +1,35 @@
+<section class="outer">
+  <article class="articles">
+    <% const title = `#&nbsp;${page.tag}`; %>
+    <h1 class="page-type-title"><%- title %></h1>
+    <%
+      page.posts.each((post, index) => {
+        const year = post.date.year();
+    %>
+        <div class="archives-wrap">
+          <div class="archive-year-wrap">
+            <a
+              href="<%- url_for(config.archive_dir + '/' + year) %>"
+              class="archive-year">
+              <%= year %>
+            </a>
+          </div>
+          <div class="archives">
+            <%- partial('archive-post', {post: post, even: index % 2 == 0}) %>
+          </div>
+        </div>
+    <%
+      });
+      if (page.total > 1) {
+    %>
+      <nav class="page-nav">
+        <%-
+          paginator({
+            prev_text: theme.nav_text.page_prev,
+            next_text: theme.nav_text.page_next
+          })
+        %>
+      </nav>
+    <% } %>
+  </article>
+</section>

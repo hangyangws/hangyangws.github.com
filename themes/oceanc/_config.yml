@@ -1,0 +1,63 @@
+# Menu
+menu:
+  Home: /
+  Archives: /archives
+  Gallery: /gallery
+  About: /about
+  Tags: /tags
+# rss: /atom.xml
+
+# Miscellaneous
+favicon: /favicon.ico
+brand: /images/hexo.svg
+
+# Ocean Video
+# Because I put videos in multiple formats on the same path, I just labeled the path here.
+ocean:
+  overlay: true
+  path: /images/ocean/
+  brand: /images/hexo-inverted.svg
+
+# Content
+excerpt_link: Read More...
+share_text: Share
+nav_text:
+  page_prev: Prev page
+  page_next: Next page
+  post_prev: Newer posts
+  post_next: Olde posts
+
+# fancybox
+fancybox: true
+
+# RSS
+# feed:
+#   type: atom
+#   path: atom.xml
+#   limit: 20
+#   hub:
+#   content:
+#   content_limit: 140
+#   content_limit_delim: ' '
+#   order_by: -date
+
+# Local search
+search_text: Search
+# Dependencies: https://github.com/flashlab/hexo-generator-search
+local_search:
+  enable: true
+  # if auto, trigger search by changing input
+  # if manual, trigger search by pressing enter key or search button
+  trigger: auto
+  # show top n results per article, show all results by setting to -1
+  top_n_per_article: 1
+  unescape: true
+
+# Gitalk
+gitalk:
+  enable: false # true
+  clientID: # GitHub Application Client ID
+  clientSecret: # Client Secret
+  repo: # Repository name
+  owner: # GitHub ID
+  admin: # GitHub ID

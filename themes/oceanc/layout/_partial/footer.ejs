@@ -1,0 +1,13 @@
+<footer class="footer">
+  <% if (theme.sidebar === 'bottom') { %>
+    <%- partial('_partial/sidebar') %>
+  <% } %>
+  <div class="outer">
+    <div class="float-right">
+      <%- partial('post/busuanzi') %>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; <%= date(new Date(), 'YYYY') %> <%= config.title %></li>
+    </ul>
+  </div>
+</footer>
