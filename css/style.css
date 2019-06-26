@@ -1953,6 +1953,22 @@ pre .javascript .function {
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
+.tag-list {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+.tag-list .tag-list-item {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+.tag-list .tag-list-item::before {
+  content: "\f153";
+  font-family: feathericon;
+  margin-right: 0.5rem;
+}
 .navbar {
   position: relative;
   padding-top: 3rem;
@@ -1991,7 +2007,7 @@ pre .javascript .function {
   content: '\f1a9';
 }
 .navbar .nav.nav-main .nav-item:nth-child(4) .nav-item-link::before {
-  content: '\f174';
+  content: '\f1bd';
 }
 .navbar .nav.nav-main .nav-item:nth-child(5) .nav-item-link::before {
   content: '\f153';
