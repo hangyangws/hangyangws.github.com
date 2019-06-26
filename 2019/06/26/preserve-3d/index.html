@@ -27,7 +27,12 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="post-preserve-3d" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article
+  id="post-preserve-3d"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal>
 
   <div class="article-inner">
     
@@ -61,7 +66,7 @@
 <p>涉及知识「CSS：transform、JS：deviceorientation」</p>
 </blockquote>
 <p>废话不多，先上 <a href="http://hangyangws.win/demos/src/device_orientation/cube">DEMO</a>「请使用移动设备查看」</p>
-
+<a id="more"></a>
 
 <p><img src="deviceorientation.gif" alt="deviceorientation"></p>
 <h3 id="如何搭建一个简单的立方体"><a href="#如何搭建一个简单的立方体" class="headerlink" title="如何搭建一个简单的立方体"></a>如何搭建一个简单的立方体</h3><p>只需要寥寥几行 HTML、CSS 代码就能产出一个「立方体」</p>
@@ -134,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hangyangws.win/2019/06/26/preserve-3d/" data-id="cjxcu2jes0000qan0l828ru82"
+      <a data-url="http://hangyangws.win/2019/06/26/preserve-3d/" data-id="cjxcvwob30000jfn0a4nafnn4"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
@@ -150,6 +155,26 @@
 
   
     
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'db1582ddec91680f2318',
+      clientSecret: '538f08a4f7b4eadeff4db57081c303baff6bc3d1',
+      repo: 'hangyangws.github.com',
+      owner: 'hangyangws',
+      admin: ['hangyangws'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
   
 
 </article>
