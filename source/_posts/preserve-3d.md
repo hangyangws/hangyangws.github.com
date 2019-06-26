@@ -4,6 +4,7 @@ date: 2017-05-25 18:29:58
 tags:
 - CSS
 - 动画
+- 3D
 ---
 
 > 涉及知识「CSS：transform、JS：deviceorientation」
@@ -14,7 +15,7 @@ tags:
 
 ![deviceorientation](deviceorientation.gif)
 
-### 如何搭建一个简单的立方体
+## 如何搭建一个简单的立方体
 
 只需要寥寥几行 HTML、CSS 代码就能产出一个「立方体」
 
@@ -133,7 +134,7 @@ tags:
 
 ![preserve-3d-5](preserve-3d-5.jpg)
 
-### 用陀螺仪使立方体动起来
+## 用陀螺仪使立方体动起来
 
 细心的开发者应该发现了，在最开始，我给父元素 `.cube` 设置了：  
 `transform: rotateX(10deg) rotateY(10deg) rotateZ(10deg)`  
@@ -199,7 +200,7 @@ const handleOrientation = ({beta: x, gamma: y, alpha: z}) => {
 global.addEventListener('deviceorientation', handleOrientation)
 ```
 
-### 庆祝时刻
+## 庆祝时刻
 
 现在我们已经完成了，一个利用「移动设备陀螺仪」与「preserve-3d」实现的 3D 交互效果。  
 让我们为自己鼓掌  
