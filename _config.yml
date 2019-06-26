@@ -85,6 +85,6 @@ deploy:
 # hexo-generator-searchdb@1.0.8
 search:
   path: search.xml
-  field: post
+  field: all
   format: html
   content: true
