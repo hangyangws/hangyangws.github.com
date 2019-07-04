@@ -370,4 +370,4 @@ useContext 接受 store 导出的 Context 作为参数，得到 state、dispatch
 ### 真实代码示例
 
 通过上面的目录结构、store 设计、UI 组件三大步骤，我们可以使用 hooks 搭建出和 redux 一样的数据处理流程应用了。
-如果想进一步了解，可以参考应用：[tw-agents](https://github.com/hangyangws/tw-agents)。
+如果想进一步了解，可以参考应用：[hooks-ts-test](https://github.com/hangyangws/hooks-ts-test)。
