@@ -1,43 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <%
-  var title = page.title;
+<%
+  // common function
+  const getWordsString = (keywords) => {
+    if (!keywords) {
+      return '';
+    }
+    if (typeof keywords === 'string') {
+      return keywords;
+    }
+    if (Object.prototype.toString.apply(keywords)) {
+      return keywords.join(',');
+    }
+  };
+  const getArrWordsString = (...words) => words
+    .map(getWordsString)
+    .filter(item => Boolean(item))
+    .join(',');
 
-  if (is_archive()) {
-    title = __('archive_a');
-    if (is_month()) {
+  // set title
+  let title = page.title || config.title;
+  if (is_archive()) { // 判断是否是 archive 页面
+    title = __('archive_a'); // 翻译
+
+    if (is_month()) { // 月份 archive
       title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()) {
+    } else if (is_year()) { // 年份 archive
       title += ': ' + page.year;
     }
-  } else if (is_category()) {
+  } else if (is_category()) { // 分类
     title = __('category') + ': ' + page.category;
-  } else if (is_tag()) {
+  } else if (is_tag()) { // 标签
     title = __('tag') + ': ' + page.tag;
   }
-  %>
-  <% if (page.keywords){ %>
-    <meta name="keywords" content="<%= page.keywords %>,<%= config.keywords %>">
-  <% } else if (config.keywords){ %>
-    <meta name="keywords" content="<%= config.keywords %>">
-  <% } %>
-  <% if (page.description){ %>
-    <meta name="description" content="<%= page.description %>">
-  <% } else if (config.description){ %>
-    <meta name="description" content="<%= config.description %>">
-  <% } %>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    <% if (title){ %><%= title %> |
-    <% } %>
-    <%= config.title %></title>
-  <% if (theme.favicon){ %>
-    <link rel="shortcut icon" href="<%- theme.favicon %>">
-  <% } %>
+
+  // set keyworks
+  const keyworks = getArrWordsString(page.keywords, config.keywords);
+
+  // set description
+  const description = getArrWordsString(page.description, config.description);
+%>
+<head>
+  <meta charset="utf-8" />
+  <title><%= title %></title>
+  <meta name="keywords" content="<%= keyworks %>" />
+  <meta name="description" content="<%= description %>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="shortcut icon" href="<%- theme.favicon %>">
   <%- css('css/style') %>
-  <% if (theme.fancybox){ %>
+  <% if (theme.fancybox) { %>
     <%- css('fancybox/jquery.fancybox.min') %>
   <% } %>
   <%- js('/js/pace.min.js') %>

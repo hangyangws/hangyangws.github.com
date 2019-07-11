@@ -1,6 +1,8 @@
 .navbar
   position relative
-  padding-top 3rem
+  display flex
+  flex-direction column
+  align-items center
   text-align center
   .nav
     list-unstyled()
@@ -47,7 +49,24 @@
   width 100%
 
 .logo
-  text-align center
+  width brand-size
+  height brand-size
+  position relative
+  &::before
+    content ''
+    display block
+    position absolute
+    z-index -1
+    top 0%
+    left 10%
+    width 80%
+    height 80%
+    opacity 0
+    transform scale(.5)
+    background-color: rgb(226, 229, 207)
+    border-radius 50%
+    transition(transition-logo)
   img
     width brand-size
+
 

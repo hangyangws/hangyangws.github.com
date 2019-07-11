@@ -1,6 +1,11 @@
 ---
 title: 使用 React Hooks 代替 Redux
 date: 2018-07-26 17:06:26
+description: 使用 React Hooks 代替 Redux
+keywords:
+- React
+- Hooks
+- Redux
 tags:
 - JS
 - Hooks
