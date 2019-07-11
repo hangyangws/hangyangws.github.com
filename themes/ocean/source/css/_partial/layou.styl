@@ -23,8 +23,12 @@
   bottom 0
   width aside-width
   background-color froth-light
+  box-shadow 0 1rem 3rem rgba(sea, .05)
   &.on
     right 0
+  &:hover .logo::before
+    transform scale(1)
+    opacity 1
 
 .navbar-toggle
   position absolute
@@ -39,6 +43,17 @@
     content '\f105'
     font-family feathericon
     font-size larger
+
+.navbar-github-link
+  font-size 0
+  margin-bottom: -3rem
+  display: block
+  position relative
+  z-index 1
+
+.navbar-github
+  width aside-width
+  height aside-width
 
 .wrap, .outer
   width 100%
