@@ -60,7 +60,7 @@ A JavaScript library for building user interfaces.
 
 ### redux
 
-![redux-数据流.png](redux-数据流.png)
+![redux-数据流.jpg](redux-数据流.jpg)
 
 ### hooks
 
@@ -106,7 +106,7 @@ UI 组件内，通过主动调用 dispatch 发送 action，然后经过 store �
 
 ### 目录结构
 
-![文件结构.png](文件结构.png)
+![文件结构.jpg](文件结构.jpg)
 
 这个目录是比较简单的，毕竟是个 DEMO，和 hooks 无关的没列出来。
 
@@ -160,7 +160,7 @@ export default Layout;
 
 ### store 设计
 
-![store.png](store.png)
+![store.jpg](store.jpg)
 
 #### provider.js
 
