@@ -29,50 +29,50 @@ Firebug 相比 Chrome dev tools 有很多不足，比如：不支持拖拽 DOM�
 导航栏，主要展示 devTools 主要功能，以及功能切换。最常用的功能面板有：Elements、Console、Network。  
 功能面则是当前使用功能的操作面板。  
 
-![devTools-1.png](devTools-1.png)
+![devTools-1.jpg](devTools-1.jpg)
 
 - 查找元素、修改样式、事件追踪
 
 首先选择 Element 面板，快捷键「cmd + shift + C」进入选择元素模式，或者点击界面左上角的「元素选择图标」。  
 
-![devTools-2.png](devTools-2.png)
+![devTools-2.jpg](devTools-2.jpg)
 
 鼠标移动到相应的元素上，相应的元素盒子模型会有相应的颜色高亮，用来表示当前选择到的元素的「轮廓」。   
 
-![devTools-3.png](devTools-3.png)
+![devTools-3.jpg](devTools-3.jpg)
 
 选择好对应的元素后，在操作面板会出现 2 个子面板：元素面板、样式面板。  
 并且在元素面板中高亮当前选择的元素，样式面板中展示对应样式和盒子模型。  
 在元素面板中右键元素，会展开很多操作选项，比如复制、删除、编辑节点等选项。  
 在样式面板可以查看、编辑样式，还能查看当前样式所在的 CSS 文件与对应的行数。
 
-![devTools-4.png](devTools-4.png)
-![style.png](style.png)
-![hover.png](hover.png)
+![devTools-4.jpg](devTools-4.jpg)
+![style.jpg](style.jpg)
+![hover.jpg](hover.jpg)
 
 在元素样式面板中有「Event Listeners」的一个选项，可以查看当前元素的事件绑定情况，以及对应的 JS 文件、代码。
 
-![click.png](click.png)
+![click.jpg](click.jpg)
 
 - 模拟页面 UserAgent
 
 如果我们需要写 H5 页面，但是又需要模拟手机分辨率的情况，devTools 的 device toolbar 就很有用了。  
 快捷键「cmd + shift + M」或者点击左上角第二个图标，进入 device 调整界面。  
 
-![device.png](device.png)
+![device.jpg](device.jpg)
 
 - 查看页面 http 请求
 
 选择 NetWork 面板，可以查看页面所有的 http 请求，且支持搜索、分类查询、查看 http 请求详情等功能。  
 
-![net.png](net.png)
-![http.png](http.png)
+![net.jpg](net.jpg)
+![http.jpg](http.jpg)
 
 - JS 断点
 
 选择 Sources 面板 → 在左边的资源选择区域选中需要断点的 JS 文件 → 在文件左边的行数提示上点击 → 就完成了一次断点操作。  
 
-![debug.png](debug.png)
+![debug.jpg](debug.jpg)
 
 在开发中，在文件中输入「debugger;」，JS 运行时候会自动在此行断点。  
 在 Sources 面板中，除了可以行断点，还能 XHR 断点。
@@ -84,13 +84,13 @@ Firebug 相比 Chrome dev tools 有很多不足，比如：不支持拖拽 DOM�
 
 在 Sources 面板中，混淆文件支持一键格式化。
 
-![source.png](source.png)
+![source.jpg](source.jpg)
 
 - 查看分析页面性能
 
 我们想知道 FPS、CPU、NET 的使用情况；想知道 JS 代码的执行效率；页面 DOM 的渲染情况等都可以从 Performance 面板中查看。
 
-![gpu.png](gpu.png)
+![gpu.jpg](gpu.jpg)
 
 关于性能推荐文章： [前端性能优化之 Performance 神器](https://segmentfault.com/a/1190000009845281)
 
@@ -183,7 +183,7 @@ Git 是以命令行为基础的软件，但是市面上有这种各样的 GUI �
 如果发现 git commit 的提交信息不正确，还可以通过 `git commit --amend` 命令修改。  
 通过 `git log` 命令显示你是提交记录。
 
-![gitlog.png](gitlog.png)
+![gitlog.jpg](gitlog.jpg)
 
 如果想回到某次提交的代码，可以通过 `git reset` 命令。
 例如：
@@ -213,7 +213,7 @@ Git 的很多命令以及参数需要我们自己去探索，多看文档，多�
 在熟练使用过后，会成为开发利器，爱不释手。  
 Atom 和 Sublime 大部分类似，Atom 界面是本地 HTMl 渲染，性能相比 Sublime 差一些。  
 
-![sublime](sublime.png)
+![sublime](sublime.jpg)
 
 有不少 coder 极客偏爱 Emacs、Vim，前段时间看到一个段子：  
 Q：如何得到一个标准的随机字符串？A：让新手退出 Vim。  
@@ -231,7 +231,7 @@ IDE 就像一个成熟的工厂，不仅仅能编辑代码，甚至可以代码�
 而且碰巧，我见使用 IDEA 的前端工程师们大多安装了 Vim 插件。不过 IDEA 的 Web 版目前是收费的。  
 这里谈一谈 VSCode，更友好的 UI 支持，自带 Git 管理、调试工具、扩展程序管理……  
 
-![vs.png](vs.png)
+![vs.jpg](vs.jpg)
 
 如果编辑器不能满足自己的日常需求，可以考虑进军 IDE，你会发现另一片新天地。
 
@@ -257,20 +257,20 @@ jpg 相对于 png 没有透明通道，文件体积会小很多。
 
 在 PS 里，快捷键 `cmd + shift + alt + S` 是图片保存为 web 版格式，且有各种存储选项可供挑选。
 
-![ps-save.png](ps-save.png)
+![ps-save.jpg](ps-save.jpg)
 
 首先我们讲讲 PS 切图，如下图需要把一盘小龙虾和盘子阴影切下来，用于 Web 图片。
 
-![ps1.png](ps1.png)
+![ps1.jpg](ps1.jpg)
 
 但是我们发现盘子和阴影是 2 个图层。
 
-![ps2.png](ps2.png)
+![ps2.jpg](ps2.jpg)
 
 这个时候我们可以按住 cmd 键，鼠标依次点击 2 个图层，选中后 `cmd + G` 快捷键把 2 个图层合并为一个组。  
 然后再右键新的分组，选择「快速导出 png」就可以得到我们需要的 2 个合并后的图层了，并且是透明背景的 png。
 
-![ps3.png](ps3.png)
+![ps3.jpg](ps3.jpg)
 
 另外 PS 的切图工具也是切图不错的选择。
 
@@ -278,7 +278,7 @@ jpg 相对于 png 没有透明通道，文件体积会小很多。
 
 用「切片工具」选择好要切的区域后，在导出 Web 格式的时候，会自动选择切图模式：
 
-![ps6.png](ps6.png)
+![ps6.jpg](ps6.jpg)
 
 现在 UI 设计师都不怎么用 PS 设计，好像喜欢 PS 都是喜欢玩摄影的大佬。  
 UI 设计师纷纷使用 sketch 设计视觉稿，所以我们还得学会 sketch 切图才行呀。
@@ -286,14 +286,14 @@ UI 设计师纷纷使用 sketch 设计视觉稿，所以我们还得学会 sketc
 sketch 和 PS 类似，都有层叠的概念。在选中某个层，或者某个组后，在软件右下角有个「Make Exportable」按钮。  
 sketch 支持转换切图倍数，切图格式。
 
-![sketch.png](sketch.png)
-![sketch2.png](sketch2.png)
+![sketch.jpg](sketch.jpg)
+![sketch2.jpg](sketch2.jpg)
 
 ### Charles 网络代理、抓包
 
 Charles 是作为「代理服务器」来完成封包截取的，在使用 Charles 的第一步是将其设置成系统的代理服务器。
 
-![charles1.png](charles1.png)
+![charles1.jpg](charles1.jpg)
 
 Charles 是作为代理服务器来运作的，默认情况下是不能拦截浏览器的 http 请求的，需要在浏览器上设置代理到 Charles 上。  
 这里推荐一款 Chrome 插件：SwitchyOmega「一个代理设置工具」。
@@ -301,21 +301,21 @@ Charles 是作为代理服务器来运作的，默认情况下是不能拦截浏
 比如我们现在有个需求：在线上环境调试 JS 代码。通过 Charles 代理把线上环境的 JS 文件请求替换为本地的 JS 资源。
 首先查看 Charles http 端口：
 
-![charles2.png](charles2.png)
-![charles3.png](charles3.png)
+![charles2.jpg](charles2.jpg)
+![charles3.jpg](charles3.jpg)
 
 然后在 Chrome 中使用 SwitchyOmega 设置代理到 Charles 上。
 
-![charles4.png](charles4.png)
+![charles4.jpg](charles4.jpg)
 
 再设置 Map Remote，指定代理的请求：
-![charles5.png](charles5.png)
-![charles6.png](charles6.png)
+![charles5.jpg](charles5.jpg)
+![charles6.jpg](charles6.jpg)
 
 这个时候就完成了资源代理设置，刷新浏览器，在 devTools 版本中看到的相应的 http 请求就是经过 Charles 代理后的。
 
 Charles 抓包原理一样。在设置好代理后，打开 Recoring 功能：
-![charles7.png](charles7.png)
+![charles7.jpg](charles7.jpg)
 
 抓包一般常用与手机端，因为 PC 端 devTools 可以做到相似的功能。  
 在手机端一样需要设置代理，且保持手机 Wi-Fi 和电脑处于相同的局域网。
