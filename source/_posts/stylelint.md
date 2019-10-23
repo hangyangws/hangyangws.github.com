@@ -65,7 +65,7 @@ CSS 看似简单，想要写出漂亮的 CSS 还是相当困难。[CSS 为什么
 }
 ```
 
-具体的配置文件内容，欢迎参考：[点我呀](https://raw.githubusercontent.com/hangyangws/article/master/src/data/.stylelintrc)  
+具体的配置文件内容，欢迎参考：[点我呀](https://github.com/hangyangws/notes/blob/master/src/data/.stylelintrc)  
 注：配置文件使用的 CSS 属性排序规则来自 [这里](https://github.com/Wizard67/note-css-order#properties-属性)
 
 - 在 package.json 的 scripts 字段中添加相关命令
